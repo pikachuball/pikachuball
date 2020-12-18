@@ -25,7 +25,7 @@ push constant 100
 call String.appendChar 2
 call Output.printString 1
 pop temp 0
-call output.println 0
+call Output.println 0
 pop temp 0
 push constant 0
 return
