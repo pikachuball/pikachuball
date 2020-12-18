@@ -1,0 +1,45 @@
+class Pikachu{
+    static float dt;
+    let dt = 0.001; 
+
+    field int x, y, vx, vy;
+    field bool faceleft, faceright, ontheair;
+    constructor Pikachu new(){
+        let x = 200;
+        let y = 250;
+        let vx = 0;
+        let vy = 0;
+        let ontheair = false;
+        return this;
+    }
+
+    method update(){
+        let this.x += this.vx * dt;
+        let this.y += this.vy * dt;
+        do Screen.clearScreen();
+        do Screen.drawCircle(this.x, this.y, 5);
+        if (this.vx >= 0){
+            this.faceright = true;
+            this.faceleft = false;
+        }
+        else{
+            this.faceright = false;
+            this.faceleft = true;
+        }
+        if (this.y > 0) {
+            let this.ontheair = true;
+        }
+    }
+
+    method spike(Ball b, char x){
+        if (this.ontheair & (x = 133){
+            let b.vx = 50;
+        }
+    }
+
+    method slide(){
+        if (this.faceright){
+            
+        }
+    }
+}

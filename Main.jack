@@ -1,11 +1,13 @@
 class Main {
     function void main() {
-        var char x;
-        do Output.printString("Hello World");
-        do Output.println();
-        do Output.printString("Bye, World");
-        let x = Keyboard.keyPressed();
-        do Output.printChar(x);
+        var string name;
+        var Pikachu p;
+        var bool playing;
+        let playing = true;
+        let p = Pikachu.new();
+        while(playing){
+            do Screen.drawCircle(p.x, p.y, 5);
+        }
         return;
     }
 }
