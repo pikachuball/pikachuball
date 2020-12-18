@@ -1,8 +1,11 @@
 class Main {
     function void main() {
+        var char x;
         do Output.printString("Hello World");
         do Output.println();
         do Output.printString("Bye, World");
+        let x = Keyboard.keyPressed();
+        do Output.printChar(x);
         return;
     }
 }
