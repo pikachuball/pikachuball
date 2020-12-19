@@ -1,26 +1,29 @@
 class Ball {
 
-    field Float x;
-    field Float y;
+    field Float x, y, vx, vy;
 
     static int r;
 
     constructor Ball new(int nx, int ny) {
         let x = Float.new();
         let y = Float.new();
+        let vx = Float.new();
+        let vy = Float.new();
 
         do x.setInt(nx);
         do y.setInt(ny);
         let r = 5;
         return this;
     }
+
     // updating in the physical world
+    // also with rendering
     method void update() {
         return;
     }
 
-    // rending on the screen
-    method void render() {
+    method void setVx(Float v) {
+        do vx.set(v);
         return;
     }
 

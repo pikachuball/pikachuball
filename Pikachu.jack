@@ -1,45 +1,56 @@
 class Pikachu{
-    static float dt;
-    let dt = 0.001; 
-
-    field int x, y, vx, vy;
-    field bool faceleft, faceright, ontheair;
-    constructor Pikachu new(){
-        let x = 200;
-        let y = 250;
-        let vx = 0;
-        let vy = 0;
+    field Float x, y, vx, vy;
+    field boolean faceleft, faceright, ontheair;
+    constructor Pikachu new() {
+        let x = Float.new();
+        let y = Float.new();
+        let vx = Float.new();
+        let vy = Float.new();
+        do x.setInt(200);
+        do y.setInt(250);
+        // vx = 0, vy = 0;
         let ontheair = false;
         return this;
     }
 
-    method update(){
-        let this.x += this.vx * dt;
-        let this.y += this.vy * dt;
+    method void update() {
+        var Float dt, dx, dy;
+        let dt = Phys.getDt();
+        let dx = dt.mult(vx);
+        let dy = dt.mult(vy);
+        let x = x.add(dx);
+        let y = y.add(dy);
         do Screen.clearScreen();
-        do Screen.drawCircle(this.x, this.y, 5);
-        if (this.vx >= 0){
-            this.faceright = true;
-            this.faceleft = false;
+        do Screen.drawCircle(x.toInt(), y.toInt(), 5);
+        if (~vx.isNeg()) {
+            let faceright = true;
+            let faceleft = false;
         }
-        else{
-            this.faceright = false;
-            this.faceleft = true;
+        else {
+            let faceright = false;
+            let faceleft = true;
         }
-        if (this.y > 0) {
-            let this.ontheair = true;
+        if (y.compareInt(0) = 1) {
+            let ontheair = true;
         }
+        return;
     }
 
-    method spike(Ball b, char x){
-        if (this.ontheair & (x = 133){
-            let b.vx = 50;
+    method void spike(Ball b, char x){
+        var Float smashSpeed;
+        let smashSpeed = Float.new();
+        do smashSpeed.setInt(50);
+        if (ontheair & (x = 133)) {
+            do b.setVx(smashSpeed);
         }
+        return;
     }
 
-    method slide(){
-        if (this.faceright){
+    method void slide(){
+        // TODO
+        if (faceright){
             
         }
+        return;
     }
 }

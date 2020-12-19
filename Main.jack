@@ -1,27 +1,13 @@
 class Main {
     function void main() {
-        var string name;
         var Pikachu p;
-        var bool playing;
+        var boolean playing;
         let playing = true;
         let p = Pikachu.new();
-        while(playing){
-            do Screen.drawCircle(p.x, p.y, 5);
+        do Phys.init();
+        while(playing) {
+            do Screen.drawCircle(200, 200, 5);
         }
         return;
-        // var boolean playing;
-        
-        // var Ball ball;
-
-        // do Float.init();
-
-        // let playing = true;
-        // let ball = Ball.new(200, 200);
-        
-        // while (playing) {
-        //     do ball.update();
-
-        // }
-        // return;
     }
 }
