@@ -1,11 +1,27 @@
 class Main {
     function void main() {
-        var char x;
-        do Output.printString("Hello World");
-        do Output.println();
-        do Output.printString("Bye, World");
-        let x = Keyboard.keyPressed();
-        do Output.printChar(x);
+        var Float f;
+        var int a;
+        do Float.init();
+        let f = Float.new();
+        do f.setInt(72);
+        do f.divInt(10); // 7.2
+        let a = f.toInt();
+        do Output.printInt(a);
         return;
+        // var boolean playing;
+        
+        // var Ball ball;
+
+        // do Float.init();
+
+        // let playing = true;
+        // let ball = Ball.new(200, 200);
+        
+        // while (playing) {
+        //     do ball.update();
+
+        // }
+        // return;
     }
 }

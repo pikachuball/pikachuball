@@ -1,0 +1,27 @@
+class Ball {
+
+    field Float x;
+    field Float y;
+
+    static int r;
+
+    constructor Ball new(int nx, int ny) {
+        let x = Float.new();
+        let y = Float.new();
+
+        do x.setInt(nx);
+        do y.setInt(ny);
+        let r = 5;
+        return this;
+    }
+    // updating in the physical world
+    method void update() {
+        return;
+    }
+
+    // rending on the screen
+    method void render() {
+        return;
+    }
+
+}
