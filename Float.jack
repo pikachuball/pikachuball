@@ -1324,9 +1324,35 @@ class Float {
 	}
 
 	method int toInt() {
-		var String s;
-		let s = toString(0);
-		return s.intValue();
+		var String s, f, p;
+        var int i, power, j;
+        var char x;
+        let s = toString(9);
+        let f = String.new(10);
+        let p = String.new(4);
+        let i = 11;
+        while (i < 15) {
+            let x = s.charAt(i);
+            if (~(x=43)) {
+                do p.appendChar(x);
+            }
+            let i = i + 1;
+        }
+        let i = 0;
+        let power = p.intValue();
+        while (power > -1) {
+            let x = s.charAt(i);
+            if (Util.ne(x, 46)) { // if x != '.'
+                do f.appendChar(x);
+                let power = power - 1;
+            }
+            let i = i + 1;
+        }
+        let i = f.intValue();
+        do s.dispose();
+        do f.dispose();
+        do p.dispose();
+        return i;
 	}
 
 

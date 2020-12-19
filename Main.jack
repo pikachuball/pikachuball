@@ -2,11 +2,13 @@ class Main {
     function void main() {
         var Pikachu p;
         var boolean playing;
+        do Float.init();
+        do Phys.init();
         let playing = true;
         let p = Pikachu.new();
         do Phys.init();
         while(playing) {
-            do Screen.drawCircle(200, 200, 5);
+            do p.update();
         }
         return;
     }
