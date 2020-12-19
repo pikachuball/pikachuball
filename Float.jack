@@ -1327,6 +1327,12 @@ class Float {
 		var String s, f, p;
         var int i, power, j;
         var char x;
+        var boolean hasNeg;
+        let hasNeg = false;
+        if (isNeg()) {
+            let hasNeg = true;
+            do neg();
+        }
         let s = toString(9);
         let f = String.new(10);
         let p = String.new(4);
@@ -1352,6 +1358,10 @@ class Float {
         do s.dispose();
         do f.dispose();
         do p.dispose();
+        if(hasNeg) {
+            let i = i * -1;
+            do neg();
+        }
         return i;
 	}
 
