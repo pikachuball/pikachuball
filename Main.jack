@@ -1,13 +1,13 @@
 class Main {
     function void main() {
-        var Float f;
-        var int a;
-        do Float.init();
-        let f = Float.new();
-        do f.setInt(72);
-        do f.divInt(10); // 7.2
-        let a = f.toInt();
-        do Output.printInt(a);
+        var string name;
+        var Pikachu p;
+        var bool playing;
+        let playing = true;
+        let p = Pikachu.new();
+        while(playing){
+            do Screen.drawCircle(p.x, p.y, 5);
+        }
         return;
         // var boolean playing;
         
