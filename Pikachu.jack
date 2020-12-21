@@ -20,8 +20,6 @@ class Pikachu{
         let dy = dt.mult(vy);
         let x = x.add(dx);
         let y = y.add(dy);
-        do Screen.clearScreen();
-        do Screen.drawCircle(x.toInt(), y.toInt(), 5);
         if (~vx.isNeg()) {
             let faceright = true;
             let faceleft = false;
@@ -33,6 +31,11 @@ class Pikachu{
         if (y.compareInt(0) = 1) {
             let ontheair = true;
         }
+        return;
+    }
+
+    method void render() {
+        do Screen.drawCircle(x.toInt(), y.toInt(), 8);
         return;
     }
 

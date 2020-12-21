@@ -1,14 +1,25 @@
 class Main {
     function void main() {
         var Pikachu p;
+        var Ball b;
+
         var boolean playing;
+        var ScreenManager sm;
+        var PhysicsManager pm;
+
         do Float.init();
         do Phys.init();
-        let playing = true;
+
         let p = Pikachu.new();
-        do Phys.init();
+        let b = Ball.new(30, 30);
+
+        let sm = ScreenManager.new(p, b);
+        let pm = PhysicsManager.new(p, b);
+
+        let playing = true;
         while(playing) {
-            do p.update();
+            do pm.update();
+            do sm.render();
         }
         return;
     }

@@ -19,6 +19,21 @@ class Ball {
     // updating in the physical world
     // also with rendering
     method void update() {
+        var Float dv, dt;
+
+        let dt = Phys.getDt();
+
+        let x = x.add(vx.mult(dt));
+        let y = y.add(vy.mult(dt));
+
+        // let dv = Phys.getG().mult(Phys.getDt()); multiple dots is impossible
+        let dv = dt.mult(Phys.getG());
+        let vx = vx.sub(dv); // vx = vx - dv
+        return;
+    }
+
+    method void render() {
+        do Screen.drawCircle(x.toInt(), y.toInt(), 5);
         return;
     }
 
