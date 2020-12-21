@@ -19,16 +19,15 @@ class Ball {
     // updating in the physical world
     // also with rendering
     method void update() {
-        var Float dv, dt;
+        var Float dvy, dt;
 
         let dt = Phys.getDt();
 
         let x = x.add(vx.mult(dt));
         let y = y.add(vy.mult(dt));
 
-        // let dv = Phys.getG().mult(Phys.getDt()); multiple dots is impossible
-        let dv = dt.mult(Phys.getG());
-        let vx = vx.sub(dv); // vx = vx - dv
+        let dvy = Phys.getDvy();
+        let vy = vx.add(dvy); // vx = vx + dv
         return;
     }
 

@@ -34,11 +34,10 @@ class Pikachu{
     }
 
     method void update() {
-        var Float dt, g, dvy, dx, dy;
+        var Float dt, dvy, dx, dy;
 
-        let dt = Phys.getDt();
-        let g = Phys.getG();
         let dvy = Phys.getDvy();
+        let dt = Phys.getDt();
 
         let dx = dt.mult(vx);
         let dy = dt.mult(vy);
@@ -62,14 +61,14 @@ class Pikachu{
             let faceright = false;
             let faceleft = true;
         }
-        if (y.compare(250) = -1) {
+        if (y.compareInt(250) = -1) {
             let ontheair = true;
         }
         return;
     }
 
     method void render() {
-        do Screen.drawCircle(x.toInt(), y.toInt(), 8);
+        do ScreenManager.drawCircle(x.toInt(), y.toInt(), 5);
         return;
     }
 
@@ -103,8 +102,9 @@ class Pikachu{
         if (~(ontheair) & c = 131){
             do setvy();    //jump
         }
-        if (ontheair & c = 133){
-            do spike();
+        if (ontheair & (c = 133)){
+            // do spike();
         }
+        return;
     }
 }
