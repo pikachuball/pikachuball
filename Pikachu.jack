@@ -1,4 +1,5 @@
 class Pikachu{
+
     field Float x, y, vx, vy;
     field boolean faceleft, faceright, ontheair;
     constructor Pikachu new() {
@@ -6,22 +7,56 @@ class Pikachu{
         let y = Float.new();
         let vx = Float.new();
         let vy = Float.new();
-        do x.setInt(200);
+        do x.setInt(100);
         do y.setInt(250);
         // vx = 0, vy = 0;
         let ontheair = false;
         return this;
     }
+    method Float getx(){
+        return x;
+    }
+    method void setvx(int dir){
+        if (dir = 0){
+            let vx = vx.setInt(5);
+        }
+        if (dir = -1){
+            let vx = vx.setInt(-5);
+        }
+        return;
+    }
+    method void setvy(){
+        let vy = vy.setInt(-50);
+        return;
+    }
+    method boolean getontheair(){
+        return ontheair;
+    }
 
     method void update() {
-        var Float dt, dx, dy;
+        var Float dt, g, dvy, dx, dy;
+
         let dt = Phys.getDt();
+        let g = Phys.getG();
+        let dvy = Phys.getDvy();
+
         let dx = dt.mult(vx);
         let dy = dt.mult(vy);
+
         let x = x.add(dx);
         let y = y.add(dy);
+
+        if (y.compareInt(249) = -1){
+            let vy = vy.add(dvy);
+        }
+        else{
+            do y.setInt(250);
+            do vy.setInt(0);
+        }
+
         do Screen.clearScreen();
         do Screen.drawCircle(x.toInt(), y.toInt(), 5);
+
         if (~vx.isNeg()) {
             let faceright = true;
             let faceleft = false;
@@ -30,7 +65,7 @@ class Pikachu{
             let faceright = false;
             let faceleft = true;
         }
-        if (y.compareInt(0) = 1) {
+        if (y.compare(250) = -1) {
             let ontheair = true;
         }
         return;
@@ -39,7 +74,7 @@ class Pikachu{
     method void spike(Ball b, char x){
         var Float smashSpeed;
         let smashSpeed = Float.new();
-        do smashSpeed.setInt(50);
+        do smashSpeed.setInt(20);
         if (ontheair & (x = 133)) {
             do b.setVx(smashSpeed);
         }

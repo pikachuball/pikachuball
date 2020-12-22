@@ -19,11 +19,13 @@ class Ball {
     // updating in the physical world
     // also with rendering
     method void update() {
+        do Screen.clearScreen();
+        do Screen.drawCircle(x.toInt(), y.toInt(), 5);
         return;
     }
 
     method void setVx(Float v) {
-        do vx.set(v);
+        let vx = vx.set(v);
         return;
     }
 
