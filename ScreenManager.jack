@@ -1,0 +1,16 @@
+class ScreenManager {
+    field Pikachu p;
+    field Ball b;
+    constructor ScreenManager new(Pikachu pi, Ball ba) {
+        let p = pi;
+        let b = ba;
+        return this;
+    }
+
+    method void render() {
+        do Screen.clearScreen();
+        do p.render();
+        do b.render();
+        return;
+    }
+}

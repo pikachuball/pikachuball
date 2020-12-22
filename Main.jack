@@ -1,30 +1,25 @@
 class Main {
     function void main() {
         var Pikachu p;
+        var Ball b;
+
         var boolean playing;
-        var char c;
+        var ScreenManager sm;
+        var PhysicsManager pm;
 
         do Float.init();
         do Phys.init();
 
         let p = Pikachu.new();
-        let playing = true;
+        let b = Ball.new(30, 30);
 
+        let sm = ScreenManager.new(p, b);
+        let pm = PhysicsManager.new(p, b);
+
+        let playing = true;
         while(playing) {
-            let c = Keyboard.keyPressed();
-            if (Util.ge(p.getx(), 6) & c = 130){
-                do p.setvx(-1);      //left
-            }
-            if (Util.le(p.getx(), 505) & c = 132){
-                do p.setvx(0);      //roght
-            }
-            if (~(p.getontheair()) & c = 131){
-                do p.setvy();    //jump
-            }
-            if (p.getontheair() & c = 133){
-                //do p.spike();
-            }
-            do p.update();
+            do pm.update();
+            do sm.render();
         }
         return;
     }

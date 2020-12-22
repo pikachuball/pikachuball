@@ -1,5 +1,9 @@
 class Phys {
+<<<<<<< HEAD
     static Float dt, g, dvy;
+=======
+    static Float dt, g;
+>>>>>>> origin/master
 
     function void init() {
         let dt = Float.new();
@@ -11,9 +15,15 @@ class Phys {
 
         do dt.setInt(1);
         do dt.divInt(1000); // dt = 0.001
+<<<<<<< HEAD
 
         do g.setInt(10);
 
+=======
+        let g = Float.new();
+        do g.setInt(98);
+        do g.divInt(10); // g = 9.8
+>>>>>>> origin/master
         return;
     }
 
@@ -21,6 +31,7 @@ class Phys {
         return dt;
     }
 
+<<<<<<< HEAD
     function Float getG(){
         return g;
     }
@@ -28,4 +39,9 @@ class Phys {
     function Float getDvy(){
         return dvy;
     }
+=======
+    function Float getG() {
+        return g;
+    }
+>>>>>>> origin/master
 }
