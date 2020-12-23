@@ -76,11 +76,55 @@ class Pikachu{
     }
 
     method void interactWithBall() {
+        var Ball b;
+        var int nvx;
+        let b = PhysicsManager.getBall();
+        if (faceright) {
+            let nvx = 20;
+        }
+        else {
+            let nvx = -20;
+        }
+        do b.setVx(nvx);
+        do b.setVy(-20);
         return;
     }
 
     method boolean collideWithBall() {
-        return false;
+        var Ball b;
+        var int bx, by, r;
+        let b = PhysicsManager.getBall();
+        let bx = b.getx();
+        let by = b.gety();
+        let r = b.size();
+
+        if (bx < x) {
+            if (by < y) {
+                return Util.le(Util.dist(bx, by, x, y), r);
+            }
+            if (by > (y+sy)) {
+                return Util.le(Util.dist(bx, by, x, y+sy), r);
+            }
+            return (x-bx) < r;
+        }
+
+        if (bx > (x+sx)) {
+            if (by < y) {
+                return Util.le(Util.dist(bx, by, x+sx, y), r);
+            }
+            if (by > (y+sy)) {
+                return Util.le(Util.dist(bx, by, x+sx, y+sy), r);
+            }
+            return (bx-x-sx) < r;
+        }
+
+        if (by < y) {
+            return (y-by) < r;
+        }
+        if (by > (y+sy)) {
+            return (by-y-sy) < r;
+        }
+        return true;
     }
 
     method void update() {
@@ -91,7 +135,7 @@ class Pikachu{
         do wallPrevent();
         do statusChange();
         if (collideWithBall()) {
-            interactWithBall();
+            do interactWithBall();
         }
 
         return;
@@ -102,8 +146,10 @@ class Pikachu{
         return;
     }
 
-    method void spike(Ball b, char x){
+    method void spike(char x){
+        var Ball b;
         var int smashSpeed;
+        let b = PhysicsManager.getBall();
         let smashSpeed = 20;
         if (ontheair & (x = 133)) {
             do b.setVx(smashSpeed);

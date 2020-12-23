@@ -1,16 +1,20 @@
 class PhysicsManager {
-    field Pikachu p;
-    field Ball b;
+    static Pikachu p;
+    static Ball b;
 
-    constructor PhysicsManager new(Pikachu pi, Ball ba) {
+    function void init(Pikachu pi, Ball ba) {
         let p = pi;
         let b = ba;
-        return this;
+        return;
     }
 
-    method void update() {
+    function void update() {
         do p.update();
         do b.update();
         return;
+    }
+
+    function Ball getBall() {
+        return b;
     }
 }
