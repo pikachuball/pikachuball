@@ -36,6 +36,8 @@ class Pikachu{
     method void update() {
         var Float dt, dvy, dx, dy;
 
+        do keyInput();
+
         let dvy = Phys.getDvy();
         let dt = Phys.getDt();
 
