@@ -1,15 +1,18 @@
 class PhysicsManager {
     static Pikachu p;
     static Ball b;
+    static Rod r;
 
-    function void init(Pikachu pi, Ball ba) {
+    function void init(Pikachu pi, Ball ba, Rod ro) {
         let p = pi;
         let b = ba;
+        let r = ro;
         return;
     }
 
     function void update() {
         do p.update();
+        do r.update();
         do b.update();
         return;
     }

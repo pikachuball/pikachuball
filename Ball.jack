@@ -33,6 +33,14 @@ class Ball {
         return y;
     }
 
+    method int getvx(){
+        return vx;
+    }
+
+    method int getvy(){
+        return vy;
+    }
+
     method int size() {
         return r;
     }

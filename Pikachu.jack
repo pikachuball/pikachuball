@@ -79,20 +79,23 @@ class Pikachu{
     }
 
     method void statusChange() {
-        var int i, j;
+        var int i, j, k;
         let i = 0;
         let j = 0;
+        let k = 0;
         if (y > (Phys.getGround()-1-sy)) {
             let ontheair = false;
             if (sliding){
-                let sliding = false;
-                while(i < 10000){
-                    while(j < 10000){
-                        let j = j+1;
+                while(k < 10000){
+                    while(i < 10000){
+                        while(j < 10000){
+                            let j = j+1;
+                        }
+                        let i = i+1;
                     }
-                    let i = i+1;
+                    let k = k+1;
                 }
-                
+                let sliding = false;
             }
         }
         else {
@@ -180,7 +183,18 @@ class Pikachu{
     }
 
     method void render() {
-        do Screen.drawRectangle(x, y, x+sx, y+sy);
+        if (~(sliding)){
+            do Screen.drawRectangle(x, y, x+sx, y+sy);
+        }
+        else{
+            if (faceright){
+                do Screen.drawRectangle(x, y, x+sy, y+sx);
+            }
+            else{
+                do Screen.drawRectangle(x, y, x+sy, y+sx);
+            }
+            
+        }
         return;
     }
 

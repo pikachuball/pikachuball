@@ -1,0 +1,65 @@
+class Rod {
+    field int x, y, sx, sy;
+
+    constructor Rod new() {
+        let x = 244;
+        let y = 155;
+        let sx = 2;
+        let sy = 100;
+
+        return this;
+    }
+    method void interactWithBall() {
+        var Ball b;
+        var int bx, by, r;
+        
+        let b = PhysicsManager.getBall();
+        let bx = b.getx();
+        let by = b.gety();
+
+        if ((243 < bx) & (bx < 246) & (by < 155)){
+            do b.setVy(-Math.abs(b.getvy()) * 7 / 10);
+        }
+        else{
+            if (b.getvx() < 0) {
+                do b.setVx(Math.abs(b.getvx()) * 7 / 10);
+            }
+            else {
+                do b.setVx(-Math.abs(b.getvx()) * 7 / 10);
+            }
+        }
+        return;
+    }
+
+    method boolean collideWithBall() {
+        var Ball b;
+        var int bx, by, r;
+        let b = PhysicsManager.getBall();
+        let bx = b.getx();
+        let by = b.gety();
+        let r = b.size();
+
+        if (bx < x) {
+            if (by > y) {
+                return Util.le(Util.dist(bx, by, x, by), r);
+            }
+        }
+        if (bx > (x+sx)) {
+            if (by > y) {
+                return Util.le(Util.dist(bx, by, x+sx, by), r);
+            }
+        }
+        if ((bx < x) & (bx > (x+sx))){
+            return Util.le(Util.dist(bx, by, bx, y), r);
+        }
+        
+        return false;
+    }
+
+    method void update(){
+        if (collideWithBall()) {
+            do interactWithBall();
+        }
+        return;
+    }
+}

@@ -2,6 +2,7 @@ class Main {
     function void main() {
         var Pikachu p;
         var Ball b;
+        var Rod r;
 
         var boolean playing;
 
@@ -11,8 +12,9 @@ class Main {
 
         let p = Pikachu.new(true);
         let b = Ball.new(30, 30);
+        let r = Rod.new();
 
-        do PhysicsManager.init(p, b);
+        do PhysicsManager.init(p, b, r);
         do ScreenManager.init(p, b);
 
         let playing = true;
