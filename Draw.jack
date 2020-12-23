@@ -1,0 +1,7 @@
+class Draw {
+    function void drawMap () {
+        do Screen.drawRectangle(0, 240, 511, 255);
+        do Screen.drawRectangle(244, 155, 246, 255);
+        return;
+    }
+}

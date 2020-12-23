@@ -10,8 +10,25 @@ class ScreenManager {
 
     function void render() {
         do Screen.clearScreen();
+        do Draw.drawMap();
         do p.render();
         do b.render();
+        return;
+    }
+
+    function void mainlobby(){
+        do Screen.clearScreen();
+        // TODO
+        return;
+    }
+
+    function void playing(){
+        // TODO
+        return;
+    }
+
+    function void end(){
+        // TODO
         return;
     }
 

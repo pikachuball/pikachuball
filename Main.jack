@@ -19,14 +19,14 @@ class Main {
         while(playing) {
             // TODO: split rendering and updating
             do PhysicsManager.update();
-            if (Util.rem(t, 6) = 0) {
+            if (Util.rem(t, 1) = 0) {
                 do ScreenManager.render();
             }
             let t = t + 1;
             if (t > 6000) {
                 let t = 0;
             }
-            do Sys.wait(10);
+            do Sys.wait(20);
         }
         return;
     }

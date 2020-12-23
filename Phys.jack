@@ -1,9 +1,10 @@
 class Phys {
-    static int dt, dvy;
+    static int dt, dvy, ground;
 
     function void init() {
         let dt = 1;
         let dvy = 1;
+        let ground = 240;
         return;
     }
 
@@ -13,5 +14,9 @@ class Phys {
 
     function int getDvy(){
         return dvy;
+    }
+
+    function int getGround(){
+        return ground;
     }
 }
