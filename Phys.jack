@@ -7,11 +7,11 @@ class Phys {
         return;
     }
 
-    function Float getDt() {
+    function int getDt() {
         return dt;
     }
 
-    function Float getDvy(){
+    function int getDvy(){
         return dvy;
     }
 }

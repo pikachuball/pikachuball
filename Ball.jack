@@ -25,6 +25,14 @@ class Ball {
         return;
     }
 
+    method int getx() {
+        return x;
+    }
+    
+    method int gety() {
+        return y;
+    }
+
     method void gravity() {
         var int dvy;
         let dvy = Phys.getDvy();

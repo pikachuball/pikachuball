@@ -1,13 +1,16 @@
 class Pikachu{
 
-    field int x, y, vy;
+    field int x, y, vy, smashDirection;
     field boolean faceright, ontheair;
-    static int dx;
-    constructor Pikachu new() {
+    static int dx, sx, sy; // move per press, sizex, sizey
+    constructor Pikachu new(boolean fr) {
         let x = 100;
         let y = 250;
         let ontheair = false;
-        let faceright = true;
+        let faceright = fr;
+
+        let sx = 10;
+        let sy = 20;
 
         let dx = 5;
         return this;
@@ -28,10 +31,6 @@ class Pikachu{
         return;
     }
 
-    method boolean getontheair(){
-        return ontheair;
-    }
-
     method void movey() {
         var int dt, dy;
         let dt = Phys.getDt();
@@ -42,9 +41,9 @@ class Pikachu{
     }
 
     method void groundPrevent() {
-        if (y > 249) {
+        if (y > (255-1-sy)) {
             let vy = 0;
-            let y = 250;
+            let y = 255-sy;
         }
         return;
     }
@@ -57,23 +56,31 @@ class Pikachu{
     }
 
     method void wallPrevent() {
-        if(x < 6) {
-            let x = 6;
+        if(x < 0) {
+            let x = 0;
         }
-        if(x > 505) {
-            let x = 505;
+        if(x > (511-1-sx)) {
+            let x = 511-sx;
         }
         return;
     }
 
     method void statusChange() {
-        if (y > 249) {
+        if (y > (255-1-sy)) {
             let ontheair = false;
         }
         else {
             let ontheair = true;
         }
         return;
+    }
+
+    method void interactWithBall() {
+        return;
+    }
+
+    method boolean collideWithBall() {
+        return false;
     }
 
     method void update() {
@@ -83,13 +90,15 @@ class Pikachu{
         do groundPrevent();
         do wallPrevent();
         do statusChange();
-        do interactWithBall();
+        if (collideWithBall()) {
+            interactWithBall();
+        }
 
         return;
     }
 
     method void render() {
-        do ScreenManager.drawCircle(x, y, 5);
+        do Screen.drawRectangle(x, y, x+sx, y+sy);
         return;
     }
 

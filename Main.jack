@@ -9,7 +9,7 @@ class Main {
 
         do Phys.init();
 
-        let p = Pikachu.new();
+        let p = Pikachu.new(true);
         let b = Ball.new(30, 30);
 
         let sm = ScreenManager.new(p, b);
