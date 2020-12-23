@@ -16,13 +16,15 @@ class ScreenManager {
 
     function void drawCircle(int x, int y, int r) {
         /** check if there's a problem with the circle. */
+        // do Output.println();
         // do Output.printString("x=");
         // do Output.printInt(x);
         // do Output.printString(" y=");
         // do Output.printInt(y);
         // do Output.printString(" r=");
         // do Output.printInt(r);
-        // do Sys.wait(1);
+        // do Output.println();
+        // do Sys.wait(2000);
         do Screen.drawCircle(x, y, r);
         return;
     }

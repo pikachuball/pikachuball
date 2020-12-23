@@ -7,13 +7,6 @@ class Util {
         return true;
     }
 
-    function boolean fige(Float a, int b) {
-        if (~(a.compareInt(b) = -1)) {
-            return true;
-        }
-        return false;
-    }
-
     // <=
     function boolean le(int a, int b) {
         if(a > b) { 
@@ -22,23 +15,9 @@ class Util {
         return true;
     }
 
-    function boolean file(Float a, int b) {
-        if(~(a.compareInt(b) = 1)) {
-            return true;
-        }
-        return false;
-    }
-
     // !=, ~=
     function boolean ne(int a, int b) {
         if(a = b) { 
-            return false;
-        }
-        return true;
-    }
-
-    function boolean fine(int a, int b) {
-        if (a.compareInt(b)) {
             return false;
         }
         return true;

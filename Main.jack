@@ -7,7 +7,6 @@ class Main {
         var ScreenManager sm;
         var PhysicsManager pm;
 
-        do Float.init();
         do Phys.init();
 
         let p = Pikachu.new();
@@ -18,8 +17,10 @@ class Main {
 
         let playing = true;
         while(playing) {
+            // TODO: split rendering and updating
             do pm.update();
             do sm.render();
+            do Sys.wait(100);
         }
         return;
     }
