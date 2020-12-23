@@ -1,44 +1,92 @@
 class Ball {
 
-    field Float x, y, vx, vy;
+    field int x, y, vx, vy;
 
     static int r;
 
     constructor Ball new(int nx, int ny) {
-        let x = Float.new();
-        let y = Float.new();
-        let vx = Float.new();
-        let vy = Float.new();
+        let x = nx;
+        let y = ny;
+        let vx = 0;
+        let vy = 0;
 
-        do x.setInt(nx);
-        do y.setInt(ny);
         let r = 5;
         return this;
     }
 
-    // updating in the physical world
-    // also with rendering
-    method void update() {
-        var Float dvy, dt;
-
+    method void move() {
+        var int dt, dx, dy;
         let dt = Phys.getDt();
+        let dx = vx * dt;
+        let dy = vy * dt;
+        let x = x + dx;
+        let y = y + dy;
 
-        let x = x.add(vx.mult(dt));
-        let y = y.add(vy.mult(dt));
+        return;
+    }
 
+    method int getx() {
+        return x;
+    }
+    
+    method int gety() {
+        return y;
+    }
+
+    method int size() {
+        return r;
+    }
+
+    method void gravity() {
+        var int dvy;
         let dvy = Phys.getDvy();
-        let vy = vx.add(dvy); // vx = vx + dv
+        let vy = vy + dvy;
+        return;
+    }
+    
+    method void boundsPrevent() {
+        if (y > (255-r-1)) {
+            let vy = -Math.abs(vy) * 7 / 10;
+            // if (vy > -3) {
+            //     let vy = 0;
+            // }
+            let y = 255-r;
+        }
+        if (y < (r+1)) {
+            let vy = Math.abs(vy);
+            let y = r;
+        }
+        if (x > (511-r-1)) {
+            let vx = -Math.abs(vx);
+            let x = 511-r;
+        }
+        if (x < (r+1)) {
+            let vx = Math.abs(vx);
+            let x = r;
+        }
+        return;
+    }
+
+    // updating in the physical world
+    method void update() {
+        do move();
+        do gravity();
+        do boundsPrevent();
         return;
     }
 
     method void render() {
-        // TODO
-        do Screen.drawCircle(x.toInt(), y.toInt(), 5);
+        do Screen.drawCircle(x, y, r);
         return;
     }
 
-    method void setVx(Float v) {
-        let vx = vx.set(v);
+    method void setVx(int v) {
+        let vx = v;
+        return;
+    }
+
+    method void setVy(int v) {
+        let vy = v;
         return;
     }
 

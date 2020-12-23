@@ -1,89 +1,194 @@
 class Pikachu{
 
-    field Float x, y, vx, vy;
-    field boolean faceleft, faceright, ontheair;
-    constructor Pikachu new() {
-        let x = Float.new();
-        let y = Float.new();
-        let vx = Float.new();
-        let vy = Float.new();
-        do x.setInt(100);
-        do y.setInt(250);
-        // vx = 0, vy = 0;
+    field int x, y, vy, smashDirection;
+    field boolean faceright, ontheair, sliding;
+    static int dx, slide_x, sx, sy; // move per press, sizex, sizey
+    constructor Pikachu new(boolean fr) {
+        let x = 100;
+        let y = Phys.getGround();
+
+        let faceright = fr;
         let ontheair = false;
+        let sliding = false;
+
+        let sx = 30;
+        let sy = 60;
+
+        let dx = 5;
+        let slide_x = 10;
         return this;
     }
-    method Float getx(){
-        return x;
-    }
-    method Float gety(){
-        return y;
-    }
-    method Float getvx(){
-        return vx;
-    }
-    method Float getvy(){
-        return vy;
-    }
-    method boolean getfaceleft(){
-        return faceleft;
-    }
-    method boolean getfaceright(){
-        return faceright;
-    }
-    method boolean getontheair(){
-        return ontheair;
-    }
-    method void setx(Float nx){
-        let x = nx;
-        return;
-    }
-    method void sety(Float ny){
-        let y = ny;
-        return;
-    }
-    method void setvx(int dir){
-        if (dir = 0){
-            let vx = vx.setInt(100);
+
+    method void movex(boolean dir){
+        if (dir){
+            let x = x + dx;
         }
-        if (dir = -1){
-            let vx = vx.setInt(-100);
+        else {
+            let x = x - dx;
         }
-        return;
-    }
-    method void setvy(Float nvy){
-        let vy = vy.setInt(nvy);
-        return;
-    }
-    method void setfaceleft(boolean x){
-        let faceleft = x;
-        return;
-    }
-    method void setfaceright(boolean x){
-        let faceright = x;
-        return;
-    }
-    method void setontheair(boolean x){
-        let ontheair = x;
         return;
     }
 
+    method void slidex(boolean dir){
+        if (dir){
+            let x = x + slide_x;
+        }
+        else{
+            let x = x - slide_x;
+        }
+        return;
+    }
+
+    method void movey() {
+        var int dt, dy;
+        let dt = Phys.getDt();
+
+        let dy = dt*vy;
+        let y = y + dy;
+        return;
+    }
+
+    method void jump(){
+        let vy = -15;
+        return;
+    }
+
+    method void groundPrevent() {
+        if (y > (Phys.getGround()-1-sy)) {
+            let vy = 0;
+            let y = Phys.getGround()-sy;
+        }
+        return;
+    }
+
+    method void gravity() {
+        var int dvy;
+        let dvy = Phys.getDvy();
+        let vy = vy + dvy;
+        return;
+    }
+
+    method void wallPrevent() {
+        if(x < 0) {
+            let x = 0;
+        }
+        if(x > (244-1-sx)) {
+            let x = 244-sx;
+        }
+        return;
+    }
+
+    method void statusChange() {
+        var int i, j;
+        let i = 0;
+        let j = 0;
+        if (y > (Phys.getGround()-1-sy)) {
+            let ontheair = false;
+            if (sliding){
+                let sliding = false;
+                while(i < 10000){
+                    while(j < 10000){
+                        let j = j+1;
+                    }
+                    let i = i+1;
+                }
+                
+            }
+        }
+        else {
+            let ontheair = true;
+        }
+        return;
+    }
+
+    method void interactWithBall() {
+        var Ball b;
+        var int nvx;
+        let b = PhysicsManager.getBall();
+        if (faceright) {
+            let nvx = 20;
+        }
+        else {
+            let nvx = -20;
+        }
+        do b.setVx(nvx);
+        do b.setVy(-20);
+        return;
+    }
+
+    method boolean collideWithBall() {
+        var Ball b;
+        var int bx, by, r;
+        let b = PhysicsManager.getBall();
+        let bx = b.getx();
+        let by = b.gety();
+        let r = b.size();
+
+        if (bx < x) {
+            if (by < y) {
+                return Util.le(Util.dist(bx, by, x, y), r);
+            }
+            if (by > (y+sy)) {
+                return Util.le(Util.dist(bx, by, x, y+sy), r);
+            }
+            return (x-bx) < r;
+        }
+
+        if (bx > (x+sx)) {
+            if (by < y) {
+                return Util.le(Util.dist(bx, by, x+sx, y), r);
+            }
+            if (by > (y+sy)) {
+                return Util.le(Util.dist(bx, by, x+sx, y+sy), r);
+            }
+            return (bx-x-sx) < r;
+        }
+
+        if (by < y) {
+            return (y-by) < r;
+        }
+        if (by > (y+sy)) {
+            return (by-y-sy) < r;
+        }
+        return true;
+    }
+
     method void update() {
-        do keyInput();
-        do ChangeStatus.pikachu(this);
-        do ConditionEvaluate.pikachu(this);
+        if (~(sliding)){
+            do keyInput();
+            do movey();
+            do gravity();
+            do groundPrevent();
+            do wallPrevent();
+            do statusChange();
+            if (collideWithBall()) {
+                do interactWithBall();
+            }
+        }
+        else{
+            do slidex(faceright);
+            do movey();
+            do gravity();
+            do groundPrevent();
+            do wallPrevent();
+            do statusChange();
+            if (collideWithBall()) {
+                do interactWithBall();
+            }
+        }
         return;
     }
 
     method void render() {
-        do DrawPikachu.draw(x.toInt(), y.toInt());
+        do Screen.drawRectangle(x, y, x+sx, y+sy);
         return;
     }
 
-    method void spike(Ball b, char x){
-        var Float smashSpeed;
-        let smashSpeed = Float.new();
-        do smashSpeed.setInt(20);
+    method void spike(char x){
+        var Ball b;
+        var int smashSpeed;
+        let b = PhysicsManager.getBall();
+        let smashSpeed = 20;
         if (ontheair & (x = 133)) {
             do b.setVx(smashSpeed);
         }
@@ -91,34 +196,32 @@ class Pikachu{
     }
 
     method void slide(){
-        // TODO
-        if (faceright){
-            
-        }
+        let vy = -5;
+        let ontheair = true;
+        let sliding = true;
         return;
     }
 
     method void keyInput() {
         var char c;
-        let c = Keyboard.readChar();
-        do Output.printChar(c);
-        if (Util.ge(getx(), 6) & c = 130){
-            do setvx(-1);      //left
+        let c = Keyboard.keyPressed();
+        if (c = 130){
+            do movex(0);
+            let faceright = false ;   //left
         }
-        if (Util.le(getx(), 505) & c = 132){
-            do setvx(0);      //right
+        if (c = 132) {
+            do movex(-1);
+            let faceright = true ;     //right
         }
         if (~(ontheair) & c = 131){
-            do setvy(-31);    //jump
+            do jump();
+        }
+        if (~(ontheair) & c = 133){
+            do slide();
         }
         if (ontheair & (c = 133)){
             // do spike();
         }
-        do Output.println();
-        do Output.printInt(vx.toInt());
-        do Output.println();
-        do Output.printInt(vy.toInt());
-        do Output.println();
         return;
     }
 }

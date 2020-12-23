@@ -1,7 +1,0 @@
-class Test {
-    function void p() {
-        do Output.printString("Called test.p");
-        do Output.println();
-        return;
-    }
-}

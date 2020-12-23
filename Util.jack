@@ -7,26 +7,12 @@ class Util {
         return true;
     }
 
-    function boolean fige(Float a, int b) {
-        if (~(a.compareInt(b) = -1)) {
-            return true;
-        }
-        return false;
-    }
-
     // <=
     function boolean le(int a, int b) {
         if(a > b) { 
             return false;
         }
         return true;
-    }
-
-    function boolean file(Float a, int b) {
-        if(~(a.compareInt(b) = 1)) {
-            return true;
-        }
-        return false;
     }
 
     // !=, ~=
@@ -37,15 +23,24 @@ class Util {
         return true;
     }
 
-    function boolean fine(int a, int b) {
-        if (a.compareInt(b)) {
-            return false;
-        }
-        return true;
-    }
-
     // %
     function int rem(int a, int b) {
-        return a-b*(a/b);
+        return a-(b*(a/b));
+    }
+
+    function int dist(int ax, int ay, int bx, int by) {
+        var int dx;
+        var int dy;
+        let dx = ax-bx;
+        let dx = dx*dx;
+
+        let dy = ay-by;
+        let dy = dy*dy;
+
+        let dy = dx + dy;
+        if (dy < 0) {
+            return 32767;
+        }
+        return Math.sqrt(dy);
     }
 }
