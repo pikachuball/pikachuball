@@ -1,7 +1,152 @@
 class Draw {
-    function void drawMap () {
+    function void drawPikachu(int x, int y) {
+        do Screen.drawPixel(x, y-1);
+        do Screen.drawPixel(x, y-11);
+        do Screen.drawPixel(x, y-15);
+        do Screen.drawPixel(x-1, y-1);
+        do Screen.drawPixel(x-1, y-10);
+        do Screen.drawPixel(x-1, y-15);
+        do Screen.drawPixel(x+1, y-1);
+        do Screen.drawPixel(x+1, y-10);
+        do Screen.drawPixel(x+1, y-15);
+        do Screen.drawPixel(x-2, y);
+        do Screen.drawPixel(x-2, y-7);
+        do Screen.drawPixel(x-2, y-8);
+        do Screen.drawPixel(x-2, y-11);
+        do Screen.drawPixel(x-2, y-12);
+        do Screen.drawPixel(x-2, y-16);
+        do Screen.drawPixel(x+2, y);
+        do Screen.drawPixel(x+2, y-7);
+        do Screen.drawPixel(x+2, y-8);
+        do Screen.drawPixel(x+2, y-11);
+        do Screen.drawPixel(x+2, y-12);
+        do Screen.drawPixel(x+2, y-16);
+        do Screen.drawPixel(x-3, y);
+        do Screen.drawPixel(x-3, y-9);
+        do Screen.drawPixel(x-3, y-16);
+        do Screen.drawPixel(x+3, y);
+        do Screen.drawPixel(x+3, y-9);
+        do Screen.drawPixel(x+3, y-16);
+        do Screen.drawPixel(x-4, y-1);
+        do Screen.drawPixel(x-4, y-3);
+        do Screen.drawPixel(x-4, y-5);
+        do Screen.drawPixel(x-4, y-9);
+        do Screen.drawPixel(x-4, y-13);
+        do Screen.drawPixel(x-4, y-17);
+        do Screen.drawPixel(x+4, y-1);
+        do Screen.drawPixel(x+4, y-3);
+        do Screen.drawPixel(x+4, y-5);
+        do Screen.drawPixel(x+4, y-9);
+        do Screen.drawPixel(x+4, y-13);
+        do Screen.drawPixel(x+4, y-17);
+        do Screen.drawPixel(x-5, y-2);
+        do Screen.drawPixel(x-5, y-3);
+        do Screen.drawPixel(x-5, y-4);
+        do Screen.drawPixel(x-5, y-5);
+        do Screen.drawPixel(x-5, y-6);
+        do Screen.drawPixel(x-5, y-7);
+        do Screen.drawPixel(x-5, y-8);
+        do Screen.drawPixel(x-5, y-10);
+        do Screen.drawPixel(x-5, y-11);
+        do Screen.drawPixel(x-5, y-12);
+        do Screen.drawPixel(x-5, y-14);
+        do Screen.drawPixel(x-5, y-17);
+        do Screen.drawPixel(x-5, y-18);
+        do Screen.drawPixel(x+5, y-2);
+        do Screen.drawPixel(x+5, y-3);
+        do Screen.drawPixel(x+5, y-4);
+        do Screen.drawPixel(x+5, y-5);
+        do Screen.drawPixel(x+5, y-6);
+        do Screen.drawPixel(x+5, y-7);
+        do Screen.drawPixel(x+5, y-8);
+        do Screen.drawPixel(x+5, y-10);
+        do Screen.drawPixel(x+5, y-11);
+        do Screen.drawPixel(x+5, y-12);
+        do Screen.drawPixel(x+5, y-14);
+        do Screen.drawPixel(x+5, y-17);
+        do Screen.drawPixel(x+5, y-18);
+        do Screen.drawPixel(x-6, y-15);
+        do Screen.drawPixel(x-6, y-16);
+        do Screen.drawPixel(x-6, y-17);
+        do Screen.drawPixel(x-6, y-18);
+        do Screen.drawPixel(x+6, y-4);
+        do Screen.drawPixel(x+6, y-11);
+        do Screen.drawPixel(x+6, y-15);
+        do Screen.drawPixel(x+6, y-16);
+        do Screen.drawPixel(x+6, y-17);
+        do Screen.drawPixel(x+6, y-18);
+        do Screen.drawPixel(x+7, y-5);
+        do Screen.drawPixel(x+7, y-6);
+        do Screen.drawPixel(x+7, y-7);
+        do Screen.drawPixel(x+7, y-8);
+        do Screen.drawPixel(x+7, y-11);
+        do Screen.drawPixel(x+8, y-8);
+        do Screen.drawPixel(x+8, y-9);
+        do Screen.drawPixel(x+8, y-10);
+        do Screen.drawPixel(x+8, y-11);
+        return;
+    }
+
+    function void drawMap() {
         do Screen.drawRectangle(0, 240, 511, 255);
         do Screen.drawRectangle(244, 155, 246, 255);
+        return;
+    }
+
+    function void drawTitle(){
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString("                  ");
+        do Output.printString(" Pikachu ball !");
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString("                 ");
+        do Output.printString("  selcet speed");
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString("            ");
+        do Output.printString("   selcet difficilty");
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString("                ");
+        do Output.printString("         start !");
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        return;
+    }
+    
+    function void drawPoint(int x, int y){
+        do Screen.clearScreen();
+        do Draw.drawTitle();
+        do Screen.drawRectangle(x-250, y, x, y+2);
+        do Screen.drawRectangle(x+40, y-26, x+56, y-24);
+        do Screen.drawPixel(x+45, y-29);
+        do Screen.drawPixel(x+44, y-29);
+        do Screen.drawPixel(x+44, y-28);
+        do Screen.drawPixel(x+43, y-28);
+        do Screen.drawPixel(x+43, y-27);
+        do Screen.drawPixel(x+42, y-27);
+        do Screen.drawPixel(x+42, y-26);
+        do Screen.drawPixel(x+41, y-26);
+        do Screen.drawPixel(x+41, y-23);
+        do Screen.drawPixel(x+42, y-23);
+        do Screen.drawPixel(x+42, y-22);
+        do Screen.drawPixel(x+43, y-22);
+        do Screen.drawPixel(x+43, y-21);
+        do Screen.drawPixel(x+44, y-21);
         return;
     }
 }
