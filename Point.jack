@@ -1,0 +1,101 @@
+class Point {
+    field int x, y, x0, y0, t;
+    field boolean select, start;
+    constructor Point new(){
+        let x = 350;
+        let y = 132;
+        let x0 = 350;
+        let y0 = 132;
+        let t = 1;
+        let select = false;
+        return this;
+    }
+
+    method void init(){
+        let x = x0;
+        let y = y0;
+        let t = 1;
+        return;
+    }
+
+    method int getx() {
+        return x;
+    }
+
+    method int gety() {
+        return y;
+    }
+
+    method boolean getstart(){
+        return start;
+    }
+
+    method boolean getSelect() {
+        return select;
+    }
+
+    method void moveup() {
+        let y = y - 60;
+        let t = t - 1;
+        return;
+    }
+
+    method void movedown() {
+        let y = y + 60;
+        let t = t + 1;
+        return;
+    }
+
+    method void setSelect(boolean x) {
+        let select = x;
+        return;
+    }
+
+    method void selectspeed(){
+        do setSelect(false);
+        do init();
+        while(~(select)){
+            do keyInput();
+            do Draw.drawPoint(x, y);
+        }
+        do Main.setupdaterate(t);
+        return;
+    }
+    
+    method void selectdifficulty(){
+        // TODO
+        return;
+    }
+    
+    method void keyInput() {
+        var char c;
+        let c = Keyboard.readChar();
+        if (c = 131){               // up
+            do moveup();
+        }
+        if (c = 133){               // down
+            do movedown();
+        }
+        if (c = 128){               // enter
+            do setSelect(true);
+        }
+        return;
+    }
+
+    method void update() {
+        do Draw.drawPoint(x, y);
+        do keyInput();
+        if (select){
+            if (t =1){
+                do selectspeed();
+            }
+            if (t = 2){
+                do selectdifficulty();
+            }
+            if (t = 3){
+                let start = true;
+            }
+        }
+        return;
+    }
+}

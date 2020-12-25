@@ -10,7 +10,7 @@ class Ball {
         let vx = 0;
         let vy = 0;
 
-        let r = 5;
+        let r = 20;
         return this;
     }
 
@@ -33,6 +33,14 @@ class Ball {
         return y;
     }
 
+    method int getvx(){
+        return vx;
+    }
+
+    method int getvy(){
+        return vy;
+    }
+
     method int size() {
         return r;
     }
@@ -45,12 +53,12 @@ class Ball {
     }
     
     method void boundsPrevent() {
-        if (y > (255-r-1)) {
+        if (y > (Phys.getGround()-r-1)) {
             let vy = -Math.abs(vy) * 7 / 10;
-            // if (vy > -3) {
-            //     let vy = 0;
-            // }
-            let y = 255-r;
+            if (vy > -3) {
+                let vy = 0;
+            }
+            let y = Phys.getGround()-r;
         }
         if (y < (r+1)) {
             let vy = Math.abs(vy);

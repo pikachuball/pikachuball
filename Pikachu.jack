@@ -1,33 +1,42 @@
 class Pikachu{
 
-    field int x, y, vy, smashDirection;
-    field boolean faceright, ontheair;
-    static int dx, sx, sy; // move per press, sizex, sizey
+    field int x, y, vy, smashDirection, t, stopTime;
+    field boolean faceright, ontheair, sliding, stopping;
+    static int dx, slide_x, sx, sy; // move per press, sizex, sizey
     constructor Pikachu new(boolean fr) {
         let x = 100;
-        let y = 250;
-        let ontheair = false;
-        let faceright = fr;
+        let y = Phys.getGround();
 
-        let sx = 10;
-        let sy = 20;
+        let faceright = fr;
+        let ontheair = false;
+        let sliding = false;
+        let stopping = false;
+
+        let sx = 30;
+        let sy = 60;
 
         let dx = 5;
+        let slide_x = 10;
         return this;
     }
 
-    method void movex(int dir){
-        if (dir = 0){
+    method void movex(boolean dir){
+        if (dir){
             let x = x + dx;
         }
-        if (dir = -1){
+        else {
             let x = x - dx;
         }
         return;
     }
 
-    method void jump(){
-        let vy = -15;
+    method void slidex(boolean dir){
+        if (dir){
+            let x = x + slide_x;
+        }
+        else{
+            let x = x - slide_x;
+        }
         return;
     }
 
@@ -40,10 +49,15 @@ class Pikachu{
         return;
     }
 
+    method void jump(){
+        let vy = -15;
+        return;
+    }
+
     method void groundPrevent() {
-        if (y > (255-1-sy)) {
+        if (y > (Phys.getGround()-1-sy)) {
             let vy = 0;
-            let y = 255-sy;
+            let y = Phys.getGround()-sy;
         }
         return;
     }
@@ -59,15 +73,19 @@ class Pikachu{
         if(x < 0) {
             let x = 0;
         }
-        if(x > (511-1-sx)) {
-            let x = 511-sx;
+        if(x > (244-1-sx)) {
+            let x = 244-sx;
         }
         return;
     }
 
     method void statusChange() {
-        if (y > (255-1-sy)) {
+        if (y > (Phys.getGround()-1-sy)) {
             let ontheair = false;
+            if (sliding){
+                let stopping = true;
+                let sliding = false;
+            }
         }
         else {
             let ontheair = true;
@@ -97,6 +115,10 @@ class Pikachu{
         let bx = b.getx();
         let by = b.gety();
         let r = b.size();
+
+        if (ballOnOtherSide()) {
+            return false;
+        }
 
         if (bx < x) {
             if (by < y) {
@@ -128,7 +150,19 @@ class Pikachu{
     }
 
     method void update() {
-        do keyInput();
+        let t = t + 1;
+        if (stopping) {
+            if ((t - stopTime) > 30) {
+                let stopping = false;
+            }
+            return;
+        }
+        if (sliding){
+            do slidex(faceright);
+        }
+        else{
+            do keyInput();            
+        }
         do movey();
         do gravity();
         do groundPrevent();
@@ -137,12 +171,23 @@ class Pikachu{
         if (collideWithBall()) {
             do interactWithBall();
         }
-
         return;
     }
 
+
     method void render() {
-        do Screen.drawRectangle(x, y, x+sx, y+sy);
+        if (~(sliding)){
+            do Screen.drawRectangle(x, y, x+sx, y+sy);
+        }
+        else{
+            if (faceright){
+                do Screen.drawRectangle(x, y, x+sy, y+sx);
+            }
+            else{
+                do Screen.drawRectangle(x, y, x+sy, y+sx);
+            }
+            
+        }
         return;
     }
 
@@ -158,10 +203,10 @@ class Pikachu{
     }
 
     method void slide(){
-        // TODO
-        if (faceright){
-            
-        }
+        let vy = -5;
+        let ontheair = true;
+        let sliding = true;
+        let stopTime = t;
         return;
     }
 
@@ -169,17 +214,30 @@ class Pikachu{
         var char c;
         let c = Keyboard.keyPressed();
         if (c = 130){
-            do movex(-1);    //left
+            do movex(0);
+            let faceright = false ;   //left
         }
         if (c = 132) {
-            do movex(0);      //right
+            do movex(-1);
+            let faceright = true ;     //right
         }
         if (~(ontheair) & c = 131){
             do jump();
+        }
+        if (~(ontheair) & c = 133){
+            do slide();
         }
         if (ontheair & (c = 133)){
             // do spike();
         }
         return;
+    }
+
+    method boolean ballOnOtherSide() {
+        var Rod r;
+        var Ball b;
+        let r = PhysicsManager.getRod();
+        let b = PhysicsManager.getBall();
+        return (b.getx() > r.getRight());
     }
 }

@@ -1,32 +1,62 @@
 class Main {
+
+    static int t, updaterate;
+    static boolean selecting, playing;
+
     function void main() {
         var Pikachu p;
         var Ball b;
-
-        var boolean playing;
-
-        var int t;
-
-        do Phys.init();
+        var Rod r;
+        var Point a;
 
         let p = Pikachu.new(true);
         let b = Ball.new(30, 30);
+        let r = Rod.new();
+        let a = Point.new();
 
-        do PhysicsManager.init(p, b);
-        do ScreenManager.init(p, b);
+        let selecting = true;
+        let playing = false;
+        let t = 0;
+        let updaterate = 20;
 
-        let playing = true;
+        do Phys.init();
+        do PhysicsManager.init(p, b, r);
+        do ScreenManager.init(p, b, r);
+
+        do ScreenManager.mainlobby();
+
+        while(selecting){
+            do a.update();
+            if (a.getstart()){
+                let selecting = false;
+                let playing = true;
+            }
+        }
+
         while(playing) {
             // TODO: split rendering and updating
             do PhysicsManager.update();
-            if (Util.rem(t, 6) = 0) {
+            if (Util.rem(t, 1) = 0) {
                 do ScreenManager.render();
             }
             let t = t + 1;
             if (t > 6000) {
                 let t = 0;
             }
-            do Sys.wait(10);
+            do Sys.wait(updaterate);
+        }
+        return;
+    }
+
+    function void setupdaterate(int x){
+        if (x = 1){
+            let updaterate = 50;
+        }
+        if (x = 2){
+            let updaterate = 30;
+        }
+        if (x = 3){
+            let updaterate = 20;
         }
         return;
     }
