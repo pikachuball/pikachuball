@@ -1,7 +1,7 @@
 class Pikachu{
 
-    field int x, y, vy, smashDirection, t, stopTime;
-    field boolean faceright, ontheair, sliding, stopping;
+    field int x, y, vy, smashDirection, t, stopTime, spikedir;
+    field boolean faceright, ontheair, sliding, stopping, spiking;
     static int dx, slide_x, sx, sy; // move per press, sizex, sizey
     constructor Pikachu new(boolean fr) {
         let x = 100;
@@ -97,14 +97,20 @@ class Pikachu{
         var Ball b;
         var int nvx;
         let b = PhysicsManager.getBall();
-        if (faceright) {
-            let nvx = 20;
+        if (spiking){
+            do spike();
+            let spiking = false;
         }
-        else {
-            let nvx = -20;
+        else{
+            if (faceright) {
+                let nvx = 20;
+            }
+            else {
+                let nvx = -20;
+            }
+            do b.setVx(nvx);
+            do b.setVy(-20);
         }
-        do b.setVx(nvx);
-        do b.setVy(-20);
         return;
     }
 
@@ -152,7 +158,7 @@ class Pikachu{
     method void update() {
         let t = t + 1;
         if (stopping) {
-            if ((t - stopTime) > 30) {
+            if ((t - stopTime) > 10) {
                 let stopping = false;
             }
             return;
@@ -191,13 +197,15 @@ class Pikachu{
         return;
     }
 
-    method void spike(char x){
+    method void spike(){
         var Ball b;
-        var int smashSpeed;
+        var int smashSpeedx, smashSpeedy;
         let b = PhysicsManager.getBall();
-        let smashSpeed = 20;
+        let smashSpeedx = 20;
+        let smashSpeedy = 20;
         if (ontheair & (x = 133)) {
-            do b.setVx(smashSpeed);
+            do b.setVx(smashSpeedx);
+            do b.setVy(smashSpeedy);
         }
         return;
     }
@@ -227,8 +235,9 @@ class Pikachu{
         if (~(ontheair) & c = 133){
             do slide();
         }
-        if (ontheair & (c = 133)){
-            // do spike();
+        if (ontheair & (c = 128)){
+            do Output.backSpace();
+            let spiking = true;
         }
         return;
     }

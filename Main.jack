@@ -22,6 +22,7 @@ class Main {
         do Phys.init();
         do PhysicsManager.init(p, b, r);
         do ScreenManager.init(p, b, r);
+        do Draw.init();
 
         do ScreenManager.mainlobby();
 
@@ -32,6 +33,8 @@ class Main {
                 let playing = true;
             }
         }
+
+        do Draw.drawpreparing();
 
         while(playing) {
             // TODO: split rendering and updating

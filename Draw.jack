@@ -1,4 +1,20 @@
 class Draw {
+    static String title, speed, diffi, start, low, middle, high, easy, normal, hard, go;
+    function void init(){
+        let title = "                   Pikachu ball !";
+        let speed = "                   select speed !";
+        let diffi = "                 select difficulty !";
+        let start = "                      start !";
+        let low   = "                        low";
+        let middle= "                       middle";
+        let high  = "                        high";
+        let easy  = "                        easy";
+        let normal= "                       normal";
+        let hard  = "                        hard";
+        let go    = "                        go !";
+        return;
+    }
+
     function void drawPikachu(int x, int y) {
         do Screen.drawPixel(x, y-1);
         do Screen.drawPixel(x, y-11);
@@ -87,7 +103,6 @@ class Draw {
         return;
     }
 
-<<<<<<< HEAD
     function void drawPoint(int x, int y){
         do Screen.drawRectangle(x-250, y, x, y+2);
         do Screen.drawRectangle(x+40, y-26, x+56, y-24);
@@ -123,44 +138,38 @@ class Draw {
         return;
     }
 
-    function void drawMap() {
-=======
     function void drawFloor() {
->>>>>>> master
         do Screen.drawRectangle(0, 240, 511, 255);
         return;
     }
 
     function void drawTitle(){
         do Screen.clearScreen();
+        do Draw.drawPikachu(400, 200);
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString("                  ");
-        do Output.printString(" Pikachu ball !");
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.printString("                 ");
-        do Output.printString("  selcet speed");
+        do Output.printString(title);
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.println();
-        do Output.printString("            ");
-        do Output.printString("   selcet difficilty");
+        do Output.printString(speed);
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString("                ");
-        do Output.printString("         start !");
+        do Output.println();
+        do Output.printString(diffi);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(start);
         do Output.println();
         do Output.println();
         do Output.println();
@@ -173,30 +182,26 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString("                  ");
-        do Output.printString(" select speed !");
+        do Output.printString(speed);
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString("                    ");
-        do Output.printString("    low");
+        do Output.printString(low);
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString("                  ");
-        do Output.printString("    middle");
+        do Output.printString(middle);
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString("                  ");
-        do Output.printString("   fast !");
+        do Output.printString(high);
         do Output.println();
         do Output.println();
         do Output.println();
@@ -205,10 +210,7 @@ class Draw {
 
     function void drawpreparing(){
         do Screen.clearScreen();
-        do Draw.drawMap();
-        do Output.println();
-        do Output.println();
-        do Output.println();
+        do Draw.drawFloor();
         do Output.println();
         do Output.println();
         do Output.println();
@@ -220,10 +222,7 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.printString("                 ");
-        do Output.printString("       3");
-        do Output.println();
-        do Output.println();
-        do Output.println();
+        do Output.printString("          3");
         do Output.println();
         do Output.println();
         do Output.println();
@@ -236,7 +235,7 @@ class Draw {
         do Output.println();
         do Sys.wait(1000);
         do Screen.clearScreen();
-        do Draw.drawMap();
+        do Draw.drawFloor();
         do Output.println();
         do Output.println();
         do Output.println();
@@ -251,10 +250,7 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.printString("                 ");
-        do Output.printString("       2");
-        do Output.println();
-        do Output.println();
-        do Output.println();
+        do Output.printString("          2");
         do Output.println();
         do Output.println();
         do Output.println();
@@ -267,7 +263,7 @@ class Draw {
         do Output.println();
         do Sys.wait(1000);
         do Screen.clearScreen();
-        do Draw.drawMap();
+        do Draw.drawFloor();
         do Output.println();
         do Output.println();
         do Output.println();
@@ -282,10 +278,7 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.printString("                 ");
-        do Output.printString("       1");
-        do Output.println();
-        do Output.println();
-        do Output.println();
+        do Output.printString("          1");
         do Output.println();
         do Output.println();
         do Output.println();
@@ -298,7 +291,7 @@ class Draw {
         do Output.println();
         do Sys.wait(1000);
         do Screen.clearScreen();
-        do Draw.drawMap();
+        do Draw.drawFloor();
         do Output.println();
         do Output.println();
         do Output.println();
@@ -313,11 +306,7 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.printString("                 ");
-        do Output.printString("      Go!");
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
+        do Output.printString("         Go!");
         do Output.println();
         do Output.println();
         do Output.println();
