@@ -51,14 +51,53 @@ class Point {
         return;
     }
 
+    method void boundprevent(){
+        if (y < y0){
+            let y = y0;
+        }
+        if (y > 252){
+            let y = 252;
+        }
+        if (t < 1){
+            let t = 1;
+        }
+        if (t > 3){
+            let t = 3;
+        }
+        return;
+    }
+
+    method void selectlobby(){
+        do Draw.drawTitle();
+        do Draw.drawPoint(x, y);
+        do keyInput();
+        do boundprevent();
+        if (select){
+            if (t =1){
+                do selectspeed();
+            }
+            if (t = 2){
+                do selectdifficulty();
+            }
+            if (t = 3){
+                let start = true;
+            }
+        }
+        return;
+    }
+
     method void selectspeed(){
         do setSelect(false);
         do init();
         while(~(select)){
-            do keyInput();
+            do Draw.drawselectspeed();
             do Draw.drawPoint(x, y);
+            do keyInput();
+            do boundprevent();
         }
         do Main.setupdaterate(t);
+        do setSelect(false);
+        do init();
         return;
     }
     
@@ -76,25 +115,16 @@ class Point {
         if (c = 133){               // down
             do movedown();
         }
-        if (c = 128){               // enter
+        if (c = 128){               // c
             do setSelect(true);
+            do Output.backSpace();
         }
         return;
     }
 
     method void update() {
-        do Draw.drawPoint(x, y);
-        do keyInput();
-        if (select){
-            if (t =1){
-                do selectspeed();
-            }
-            if (t = 2){
-                do selectdifficulty();
-            }
-            if (t = 3){
-                let start = true;
-            }
+        while(~(start)){
+            do selectlobby();
         }
         return;
     }
