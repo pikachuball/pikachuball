@@ -1,31 +1,52 @@
 class ScreenManager {
-    field Pikachu p;
-    field Ball b;
-    constructor ScreenManager new(Pikachu pi, Ball ba) {
+    static Pikachu p;
+    static Ball b;
+    static Rod r;
+
+    function void init(Pikachu pi, Ball ba, Rod ro) {
         let p = pi;
         let b = ba;
-        return this;
+        let r = ro;
+        return;
     }
 
-    method void render() {
+    function void render() {
         do Screen.clearScreen();
+        do Draw.drawFloor();
         do p.render();
         do b.render();
+        do r.render();
         return;
     }
 
-    function void drawCircle(int x, int y, int r) {
-        /** check if there's a problem with the circle. */
-        // do Output.println();
-        // do Output.printString("x=");
-        // do Output.printInt(x);
-        // do Output.printString(" y=");
-        // do Output.printInt(y);
-        // do Output.printString(" r=");
-        // do Output.printInt(r);
-        // do Output.println();
-        // do Sys.wait(2000);
-        do Screen.drawCircle(x, y, r);
+    function void mainlobby(){
+        do Screen.clearScreen();
+        do Draw.drawTitle();
         return;
     }
+
+    function void playing(){
+        // TODO
+        return;
+    }
+
+    function void end(){
+        // TODO
+        return;
+    }
+
+    // function void drawCircle(int x, int y, int r) {
+    //     /** check if there's a problem with the circle. */
+    //     // do Output.println();
+    //     // do Output.printString("x=");
+    //     // do Output.printInt(x);
+    //     // do Output.printString(" y=");
+    //     // do Output.printInt(y);
+    //     // do Output.printString(" r=");
+    //     // do Output.printInt(r);
+    //     // do Output.println();
+    //     // do Sys.wait(2000);
+    //     do Screen.drawCircle(x, y, r);
+    //     return;
+    // }
 }

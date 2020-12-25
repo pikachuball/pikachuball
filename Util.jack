@@ -25,6 +25,22 @@ class Util {
 
     // %
     function int rem(int a, int b) {
-        return a-b*(a/b);
+        return a-(b*(a/b));
+    }
+
+    function int dist(int ax, int ay, int bx, int by) {
+        var int dx;
+        var int dy;
+        let dx = ax-bx;
+        let dx = dx*dx;
+
+        let dy = ay-by;
+        let dy = dy*dy;
+
+        let dy = dx + dy;
+        if (dy < 0) {
+            return 32767;
+        }
+        return Math.sqrt(dy);
     }
 }
