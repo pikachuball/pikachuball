@@ -20,4 +20,8 @@ class PhysicsManager {
     function Ball getBall() {
         return b;
     }
+
+    function Rod getRod() {
+        return r;
+    }
 }

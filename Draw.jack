@@ -87,6 +87,7 @@ class Draw {
         return;
     }
 
+<<<<<<< HEAD
     function void drawPoint(int x, int y){
         do Screen.drawRectangle(x-250, y, x, y+2);
         do Screen.drawRectangle(x+40, y-26, x+56, y-24);
@@ -123,8 +124,10 @@ class Draw {
     }
 
     function void drawMap() {
+=======
+    function void drawFloor() {
+>>>>>>> master
         do Screen.drawRectangle(0, 240, 511, 255);
-        do Screen.drawRectangle(244, 155, 246, 255);
         return;
     }
 

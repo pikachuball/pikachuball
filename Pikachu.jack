@@ -1,7 +1,7 @@
 class Pikachu{
 
-    field int x, y, vy, smashDirection;
-    field boolean faceright, ontheair, sliding;
+    field int x, y, vy, smashDirection, t, stopTime;
+    field boolean faceright, ontheair, sliding, stopping;
     static int dx, slide_x, sx, sy; // move per press, sizex, sizey
     constructor Pikachu new(boolean fr) {
         let x = 100;
@@ -10,6 +10,7 @@ class Pikachu{
         let faceright = fr;
         let ontheair = false;
         let sliding = false;
+        let stopping = false;
 
         let sx = 30;
         let sy = 60;
@@ -79,22 +80,10 @@ class Pikachu{
     }
 
     method void statusChange() {
-        var int i, j, k;
-        let i = 0;
-        let j = 0;
-        let k = 0;
         if (y > (Phys.getGround()-1-sy)) {
             let ontheair = false;
             if (sliding){
-                while(k < 10000){
-                    while(i < 10000){
-                        while(j < 10000){
-                            let j = j+1;
-                        }
-                        let i = i+1;
-                    }
-                    let k = k+1;
-                }
+                let stopping = true;
                 let sliding = false;
             }
         }
@@ -127,6 +116,10 @@ class Pikachu{
         let by = b.gety();
         let r = b.size();
 
+        if (ballOnOtherSide()) {
+            return false;
+        }
+
         if (bx < x) {
             if (by < y) {
                 return Util.le(Util.dist(bx, by, x, y), r);
@@ -157,30 +150,30 @@ class Pikachu{
     }
 
     method void update() {
-        if (~(sliding)){
-            do keyInput();
-            do movey();
-            do gravity();
-            do groundPrevent();
-            do wallPrevent();
-            do statusChange();
-            if (collideWithBall()) {
-                do interactWithBall();
+        let t = t + 1;
+        if (stopping) {
+            if ((t - stopTime) > 30) {
+                let stopping = false;
             }
+            return;
+        }
+        if (sliding){
+            do slidex(faceright);
         }
         else{
-            do slidex(faceright);
-            do movey();
-            do gravity();
-            do groundPrevent();
-            do wallPrevent();
-            do statusChange();
-            if (collideWithBall()) {
-                do interactWithBall();
-            }
+            do keyInput();            
+        }
+        do movey();
+        do gravity();
+        do groundPrevent();
+        do wallPrevent();
+        do statusChange();
+        if (collideWithBall()) {
+            do interactWithBall();
         }
         return;
     }
+
 
     method void render() {
         if (~(sliding)){
@@ -213,6 +206,7 @@ class Pikachu{
         let vy = -5;
         let ontheair = true;
         let sliding = true;
+        let stopTime = t;
         return;
     }
 
@@ -237,5 +231,13 @@ class Pikachu{
             // do spike();
         }
         return;
+    }
+
+    method boolean ballOnOtherSide() {
+        var Rod r;
+        var Ball b;
+        let r = PhysicsManager.getRod();
+        let b = PhysicsManager.getBall();
+        return (b.getx() > r.getRight());
     }
 }

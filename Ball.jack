@@ -53,13 +53,6 @@ class Ball {
     }
     
     method void boundsPrevent() {
-        if (Util.ge(x, 244) & Util.le(x, 246) & (y < (155-r-1))){ 
-            let vy = -Math.abs(vy) * 7 / 10;
-            if (vy > -3) {
-                let vy = 0;
-            }
-            let y = 155-r;
-        }
         if (y > (Phys.getGround()-r-1)) {
             let vy = -Math.abs(vy) * 7 / 10;
             if (vy > -3) {
@@ -72,22 +65,12 @@ class Ball {
             let y = r;
         }
         if (x > (511-r-1)) {
-            let vx = -Math.abs(vx) * 7 / 10;
+            let vx = -Math.abs(vx);
             let x = 511-r;
         }
-        if ((x < (r+1))) {
-            let vx = Math.abs(vx) * 7 / 10;
+        if (x < (r+1)) {
+            let vx = Math.abs(vx);
             let x = r;
-        }
-        if (y > 155){
-            if (x = (246+r+1)){
-                let vx = Math.abs(vx) * 7 / 10;
-                let x = 246+r+2;
-            }
-            if (x = (244-r-1)){
-                let vx = -Math.abs(vx) * 7 / 10;
-                let x = 244-r-2;
-            }
         }
         return;
     }
