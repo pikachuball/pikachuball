@@ -151,8 +151,11 @@ class Pikachu{
 
     method void update() {
         let t = t + 1;
+        if (collideWithBall()) {
+            do interactWithBall();
+        }
         if (stopping) {
-            if ((t - stopTime) > 30) {
+            if ((t - stopTime) > 20) {
                 let stopping = false;
             }
             return;
@@ -168,9 +171,6 @@ class Pikachu{
         do groundPrevent();
         do wallPrevent();
         do statusChange();
-        if (collideWithBall()) {
-            do interactWithBall();
-        }
         return;
     }
 

@@ -12,22 +12,34 @@ class Rod {
 
     method void interactWithBall() {
         var Ball b;
-        var int bx, by, r;
+        var int bx, by, r, px, py;
         
         let b = PhysicsManager.getBall();
         let bx = b.getx();
         let by = b.gety();
+        let px = b.getPx();
+        let py = b.getPy();
+        let r = b.size();
 
-        if ((243 < bx) & (bx < 246) & (by < 155)){
-            do b.setVy(-Math.abs(b.getvy()) * 7 / 10);
+        if (((py+r) < y) & ((by+r) < y)) {
+            return; // fly on top
         }
-        else{
-            if (b.getvx() < 0) {
-                do b.setVx(Math.abs(b.getvx()) * 7 / 10);
-            }
-            else {
-                do b.setVx(-Math.abs(b.getvx()) * 7 / 10);
-            }
+
+        if (((px+r) < x) & ((bx+r) < x)) {
+            return; // stay on left
+        }
+
+        if (((px-r) > (x+sx)) & ((bx-r) > (x+sx))) {
+            return; // stay on right
+        }
+
+        if((px+r) < x) {
+            do b.setVx(-Math.abs(b.getvx()) * 7 / 10);
+            do b.setx(x-r);
+        }
+        else {
+            do b.setVx(Math.abs(b.getvx()) * 7 / 10);
+            do b.setx(x+sx+r);
         }
         return;
     }
