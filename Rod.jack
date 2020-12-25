@@ -12,55 +12,41 @@ class Rod {
 
     method void interactWithBall() {
         var Ball b;
-        var int bx, by, r;
+        var int bx, by, r, px, py;
         
         let b = PhysicsManager.getBall();
         let bx = b.getx();
         let by = b.gety();
+        let px = b.getPx();
+        let py = b.getPy();
+        let r = b.size();
 
-        if ((243 < bx) & (bx < 246) & (by < 155)){
-            do b.setVy(-Math.abs(b.getvy()) * 7 / 10);
+        if (((py+r) < y) & ((by+r) < y)) {
+            return; // fly on top
         }
-        else{
-            if (b.getvx() < 0) {
-                do b.setVx(Math.abs(b.getvx()) * 7 / 10);
-            }
-            else {
-                do b.setVx(-Math.abs(b.getvx()) * 7 / 10);
-            }
+
+        if (((px+r) < x) & ((bx+r) < x)) {
+            return; // stay on left
+        }
+
+        if (((px-r) > (x+sx)) & ((bx-r) > (x+sx))) {
+            return; // stay on right
+        }
+
+        if(((px+r) < x) & (b.getvx() > 0)) {
+            do b.setVx(-Math.abs(b.getvx()) * 7 / 10);
+            do b.setx(x-r);
+            return;
+        }
+        if (((px-r) > (x+sx)) & (b.getvx() < 0)){
+            do b.setVx(Math.abs(b.getvx()) * 7 / 10);
+            do b.setx(x+sx+r);
         }
         return;
     }
 
-    method boolean collideWithBall() {
-        var Ball b;
-        var int bx, by, r;
-        let b = PhysicsManager.getBall();
-        let bx = b.getx();
-        let by = b.gety();
-        let r = b.size();
-
-        if (bx < x) {
-            if (by > y) {
-                return Util.le(Util.dist(bx, by, x, by), r);
-            }
-        }
-        if (bx > (x+sx)) {
-            if (by > y) {
-                return Util.le(Util.dist(bx, by, x+sx, by), r);
-            }
-        }
-        if ((bx < x) & (bx > (x+sx))){
-            return Util.le(Util.dist(bx, by, bx, y), r);
-        }
-        
-        return false;
-    }
-
     method void update(){
-        if (collideWithBall()) {
-            do interactWithBall();
-        }
+        do interactWithBall();
         return;
     }
 

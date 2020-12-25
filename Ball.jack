@@ -1,6 +1,6 @@
 class Ball {
 
-    field int x, y, vx, vy;
+    field int x, y, vx, vy, px, py;
 
     static int r;
 
@@ -77,6 +77,9 @@ class Ball {
 
     // updating in the physical world
     method void update() {
+        let px = x;
+        let py = y;
+        // stores the previous coordinate
         do move();
         do gravity();
         do boundsPrevent();
@@ -98,4 +101,18 @@ class Ball {
         return;
     }
 
+    method int getPx() {
+        return px;
+    }
+    
+    method int getPy() {
+        return py;
+    }
+
+    method void setx(int nx) {
+        let px = x;
+        
+        let x = nx;
+        return;
+    }
 }
