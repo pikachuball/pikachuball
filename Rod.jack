@@ -33,46 +33,20 @@ class Rod {
             return; // stay on right
         }
 
-        if((px+r) < x) {
+        if(((px+r) < x) & (b.getvx() > 0)) {
             do b.setVx(-Math.abs(b.getvx()) * 7 / 10);
             do b.setx(x-r);
+            return;
         }
-        else {
+        if (((px-r) > (x+sx)) & (b.getvx() < 0)){
             do b.setVx(Math.abs(b.getvx()) * 7 / 10);
             do b.setx(x+sx+r);
         }
         return;
     }
 
-    method boolean collideWithBall() {
-        var Ball b;
-        var int bx, by, r;
-        let b = PhysicsManager.getBall();
-        let bx = b.getx();
-        let by = b.gety();
-        let r = b.size();
-
-        if (bx < x) {
-            if (by > y) {
-                return Util.le(Util.dist(bx, by, x, by), r);
-            }
-        }
-        if (bx > (x+sx)) {
-            if (by > y) {
-                return Util.le(Util.dist(bx, by, x+sx, by), r);
-            }
-        }
-        if ((bx < x) & (bx > (x+sx))){
-            return Util.le(Util.dist(bx, by, bx, y), r);
-        }
-        
-        return false;
-    }
-
     method void update(){
-        if (collideWithBall()) {
-            do interactWithBall();
-        }
+        do interactWithBall();
         return;
     }
 

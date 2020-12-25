@@ -110,6 +110,8 @@ class Ball {
     }
 
     method void setx(int nx) {
+        let px = x;
+        
         let x = nx;
         return;
     }
