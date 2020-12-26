@@ -1,13 +1,8 @@
 class Pikachu{
 
-<<<<<<< HEAD
     field int x, y, vy, t, stopTime, smashTime;
     field char smashDirection;
     field boolean faceright, ontheair, sliding, stopping, smashing, canCollide;
-=======
-    field int x, y, vy, smashDirection, t, stopTime, spikedir;
-    field boolean faceright, ontheair, sliding, stopping, spiking;
->>>>>>> addsomesetting
     static int dx, slide_x, sx, sy; // move per press, sizex, sizey
     constructor Pikachu new(boolean fr) {
         let x = 100;
@@ -105,7 +100,6 @@ class Pikachu{
     method void interactWithBall() {
         var Ball b;
         let b = PhysicsManager.getBall();
-<<<<<<< HEAD
         let canCollide = false;
         if (smashing) {
             do smashBall();
@@ -162,22 +156,6 @@ class Pikachu{
         // }
         do b.setVx(20);
         do b.setVy(-20);
-=======
-        if (spiking){
-            do spike();
-            let spiking = false;
-        }
-        else{
-            if (faceright) {
-                let nvx = 20;
-            }
-            else {
-                let nvx = -20;
-            }
-            do b.setVx(nvx);
-            do b.setVy(-20);
-        }
->>>>>>> addsomesetting
         return;
     }
 
@@ -267,22 +245,9 @@ class Pikachu{
         return;
     }
 
-<<<<<<< HEAD
     method void spike() {
         let smashing = true;
         let smashDirection = 0;
-=======
-    method void spike(){
-        var Ball b;
-        var int smashSpeedx, smashSpeedy;
-        let b = PhysicsManager.getBall();
-        let smashSpeedx = 20;
-        let smashSpeedy = 20;
-        if (ontheair & (x = 133)) {
-            do b.setVx(smashSpeedx);
-            do b.setVy(smashSpeedy);
-        }
->>>>>>> addsomesetting
         return;
     }
 
@@ -321,12 +286,7 @@ class Pikachu{
             do slide();
         }
         if (ontheair & (c = 128)){
-<<<<<<< HEAD
             do spike();
-=======
-            do Output.backSpace();
-            let spiking = true;
->>>>>>> addsomesetting
         }
         return;
     }
