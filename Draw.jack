@@ -1,5 +1,8 @@
 class Draw {
-    static String title, speed, diffi, start, low, middle, high, easy, normal, hard, go;
+    static String title, speed, diffi, start, low, middle, high, 
+                    easy, normal, hard, go, goal, one, two, three,
+                     four, five, pointb, whites;
+
     function void init(){
         let title = "                   Pikachu ball !";
         let speed = "                   select speed !";
@@ -12,6 +15,14 @@ class Draw {
         let normal= "                       normal";
         let hard  = "                        hard";
         let go    = "                        go !";
+        let goal  = "                       goal !!";
+        let whites= "                     ";
+        let pointb= "    :    ";
+        let one = "1";
+        let two = "2";
+        let three = "3";
+        let four = "4";
+        let five = "5";
         return;
     }
 
@@ -317,6 +328,14 @@ class Draw {
         do Output.println();
         do Output.println();
         do Sys.wait(1000);
+        return;
+    }
+
+    function void drawpointboard(int x, int y){
+        do Output.printString(whites);
+        do Output.printInt(x);
+        do Output.printString(pointb);
+        do Output.printInt(y);
         return;
     }
 }

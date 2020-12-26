@@ -1,0 +1,14 @@
+class Floor {
+    static int x, y;
+
+    constructor Floor new(){
+        let x = 0;
+        let y = 0;
+        return this;
+    }
+
+    function void interwithball() {
+        return;
+    }
+    
+}
