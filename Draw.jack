@@ -1,4 +1,20 @@
 class Draw {
+    static String title, speed, diffi, start, low, middle, high, easy, normal, hard, go;
+    function void init(){
+        let title = "                   Pikachu ball !";
+        let speed = "                   select speed !";
+        let diffi = "                 select difficulty !";
+        let start = "                      start !";
+        let low   = "                        low";
+        let middle= "                       middle";
+        let high  = "                        high";
+        let easy  = "                        easy";
+        let normal= "                       normal";
+        let hard  = "                        hard";
+        let go    = "                        go !";
+        return;
+    }
+
     function void drawPikachu(int x, int y) {
         do Screen.drawPixel(x, y-1);
         do Screen.drawPixel(x, y-11);
@@ -87,49 +103,7 @@ class Draw {
         return;
     }
 
-    function void drawFloor() {
-        do Screen.drawRectangle(0, 240, 511, 255);
-        return;
-    }
-
-    function void drawTitle(){
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.printString("                  ");
-        do Output.printString(" Pikachu ball !");
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.printString("                 ");
-        do Output.printString("  selcet speed");
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.printString("            ");
-        do Output.printString("   selcet difficilty");
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.printString("                ");
-        do Output.printString("         start !");
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        return;
-    }
-    
     function void drawPoint(int x, int y){
-        do Screen.clearScreen();
-        do Draw.drawTitle();
         do Screen.drawRectangle(x-250, y, x, y+2);
         do Screen.drawRectangle(x+40, y-26, x+56, y-24);
         do Screen.drawPixel(x+45, y-29);
@@ -146,6 +120,203 @@ class Draw {
         do Screen.drawPixel(x+43, y-22);
         do Screen.drawPixel(x+43, y-21);
         do Screen.drawPixel(x+44, y-21);
+        return;
+    }
+
+    function void drawball(int x, int y){
+        do Screen.drawPixel(x+20, y+4);
+        do Screen.drawPixel(x+20, y+3);
+        do Screen.drawPixel(x+20, y+2);
+        do Screen.drawPixel(x+20, y+1);
+        do Screen.drawPixel(x+20, y);
+        do Screen.drawPixel(x+20, y-1);
+        do Screen.drawPixel(x+20, y-2);
+        do Screen.drawPixel(x+20, y-3);
+        do Screen.drawPixel(x+20, y-4);
+        do Screen.drawPixel(x-20, y);
+        do Screen.drawPixel(x-20, y+1);
+        return;
+    }
+
+    function void drawFloor() {
+        do Screen.drawRectangle(0, 240, 511, 255);
+        return;
+    }
+
+    function void drawTitle(){
+        do Screen.clearScreen();
+        do Draw.drawPikachu(400, 200);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(title);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(speed);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(diffi);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(start);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        return;
+    }
+    
+    function void drawselectspeed(){
+        do Screen.clearScreen();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(speed);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(low);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(middle);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(high);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        return;
+    }
+
+    function void drawpreparing(){
+        do Screen.clearScreen();
+        do Draw.drawFloor();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString("                 ");
+        do Output.printString("          3");
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Sys.wait(1000);
+        do Screen.clearScreen();
+        do Draw.drawFloor();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString("                 ");
+        do Output.printString("          2");
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Sys.wait(1000);
+        do Screen.clearScreen();
+        do Draw.drawFloor();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString("                 ");
+        do Output.printString("          1");
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Sys.wait(1000);
+        do Screen.clearScreen();
+        do Draw.drawFloor();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString("                 ");
+        do Output.printString("         Go!");
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Sys.wait(1000);
         return;
     }
 }
