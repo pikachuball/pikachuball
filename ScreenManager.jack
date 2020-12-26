@@ -2,17 +2,20 @@ class ScreenManager {
     static Pikachu p;
     static Ball b;
     static Rod r;
+    static Floor f;
 
-    function void init(Pikachu pi, Ball ba, Rod ro) {
+    function void init(Pikachu pi, Ball ba, Rod ro, Floor fl) {
         let p = pi;
         let b = ba;
         let r = ro;
+        let f = fl;
         return;
     }
 
     function void render() {
         do Screen.clearScreen();
         do Draw.drawFloor();
+        do f.render();
         do p.render();
         do b.render();
         do r.render();

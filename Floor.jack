@@ -1,5 +1,6 @@
 class Floor {
-    static int x, y;
+    field int x, y;
+    field boolean deterhitthefloor;
 
     constructor Floor new(){
         let x = 0;
@@ -7,7 +8,32 @@ class Floor {
         return this;
     }
 
-    function void interwithball() {
+    method void setdeterhitthefloor(boolean b){
+        let deterhitthefloor = b;
+        return;
+    }
+
+    method void setpoint(int k){
+        if (k < 245){
+            let x = x + 1;
+        }
+        else{
+            let y = y + 1;
+        }
+        return;
+    }
+
+    method void update(){
+        if (deterhitthefloor){
+            do Draw.drawgoalanime();
+            do Main.reset();
+            do Draw.drawpreparing();
+        }
+        return;
+    }
+
+    method void render(){
+        do Draw.drawpointboard(x, y);
         return;
     }
     

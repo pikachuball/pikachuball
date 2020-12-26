@@ -5,7 +5,7 @@ class Pikachu{
     static int dx, slide_x, sx, sy; // move per press, sizex, sizey
     constructor Pikachu new(boolean fr) {
         let x = 100;
-        let y = Phys.getGround();
+        let y = 180;
 
         let faceright = fr;
         let ontheair = false;
@@ -248,5 +248,18 @@ class Pikachu{
         let r = PhysicsManager.getRod();
         let b = PhysicsManager.getBall();
         return (b.getx() > r.getRight());
+    }
+
+    method void reset(){
+        let x = 100;
+        let y = 180;
+        let vy = 0;
+        
+        let faceright = true;
+        let ontheair = false;
+        let sliding = false;
+        let stopping = false;
+
+        return;
     }
 }

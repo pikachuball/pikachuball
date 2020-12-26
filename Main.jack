@@ -2,17 +2,19 @@ class Main {
 
     static int t, updaterate;
     static boolean selecting, playing;
+    static Pikachu p;
+    static Ball b;
+    static Rod r;
+    static Point a;
+    static Floor f;
 
     function void main() {
-        var Pikachu p;
-        var Ball b;
-        var Rod r;
-        var Point a;
-
+        
         let p = Pikachu.new(true);
-        let b = Ball.new(30, 30);
+        let b = Ball.new(100, 30);
         let r = Rod.new();
         let a = Point.new();
+        let f = Floor.new();
 
         let selecting = true;
         let playing = false;
@@ -20,8 +22,8 @@ class Main {
         let updaterate = 20;
 
         do Phys.init();
-        do PhysicsManager.init(p, b, r);
-        do ScreenManager.init(p, b, r);
+        do PhysicsManager.init(p, b, r, f);
+        do ScreenManager.init(p, b, r, f);
         do Draw.init();
 
         do ScreenManager.mainlobby();
@@ -61,6 +63,12 @@ class Main {
         if (x = 3){
             let updaterate = 20;
         }
+        return;
+    }
+
+    function void reset(){
+        do p.reset();
+        do b.reset();
         return;
     }
 }

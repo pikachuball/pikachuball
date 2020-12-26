@@ -53,12 +53,17 @@ class Ball {
     }
     
     method void boundsPrevent() {
+        var Floor f;
+        let f = PhysicsManager.getFloor();
+        do f.setdeterhitthefloor(false);
         if (y > (Phys.getGround()-r-1)) {
             let vy = -Math.abs(vy) * 7 / 10;
             if (vy > -3) {
                 let vy = 0;
             }
             let y = Phys.getGround()-r;
+            do f.setdeterhitthefloor(true);
+            do f.setpoint(x);
         }
         if (y < (r+1)) {
             let vy = Math.abs(vy);
@@ -113,6 +118,16 @@ class Ball {
         let px = x;
         
         let x = nx;
+        return;
+    }
+
+    method void reset(){
+        let x = 100;
+        let y = 30;
+        let vx = 0;
+        let vy = 0;
+        let px = 30;
+        let py = 30;
         return;
     }
 }
