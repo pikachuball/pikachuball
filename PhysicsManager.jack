@@ -1,19 +1,25 @@
 class PhysicsManager {
     static Pikachu p;
+    static PikachuComputer pc;
     static Ball b;
     static Rod r;
+    static Floor f;
 
-    function void init(Pikachu pi, Ball ba, Rod ro) {
+    function void init(Pikachu pi, PikachuComputer pco, Ball ba, Rod ro, Floor fl) {
         let p = pi;
+        let pc = pco;
         let b = ba;
         let r = ro;
+        let f = fl;
         return;
     }
 
     function void update() {
         do p.update();
+        do pc.update();
         do r.update();
         do b.update();
+        do f.update();
         return;
     }
 
@@ -23,5 +29,9 @@ class PhysicsManager {
 
     function Rod getRod() {
         return r;
+    }
+
+    function Floor getFloor() {
+        return f;
     }
 }

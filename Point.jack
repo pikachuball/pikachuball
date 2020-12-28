@@ -77,7 +77,7 @@ class Point {
                 do selectspeed();
             }
             if (t = 2){
-                do selectdifficulty();
+                do selectwinpoint();
             }
             if (t = 3){
                 let start = true;
@@ -100,9 +100,21 @@ class Point {
         do init();
         return;
     }
-    
-    method void selectdifficulty(){
-        // TODO
+
+    method void selectwinpoint(){
+        var Floor f;
+        let f = PhysicsManager.getFloor();
+        do setSelect(false);
+        do init();
+        while(~(select)){
+            do Draw.drawselectwinpoint();
+            do Draw.drawPoint(x, y);
+            do keyInput();
+            do boundprevent();
+        }
+        do f.setwinpoint(t);
+        do setSelect(false);
+        do init();
         return;
     }
     

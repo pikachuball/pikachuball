@@ -1,0 +1,63 @@
+class Floor {
+    field int x, y, winpoint;
+    field boolean deterhitthefloor;
+
+    constructor Floor new(){
+        let x = 0;
+        let y = 0;
+        return this;
+    }
+
+    method void setdeterhitthefloor(boolean b){
+        let deterhitthefloor = b;
+        return;
+    }
+
+    method void deterwin(){
+        if (x = winpoint | y = winpoint){
+            do Draw.drawend();
+            do Sys.wait(1000);
+            //do Main.restart();
+        }
+        return;
+    }
+
+    method void setpoint(int k){
+        if (k < 245){
+            let x = x + 1;
+        }
+        else{
+            let y = y + 1;
+        }
+        return;
+    }
+
+    method void setwinpoint(int x){
+        if (x = 1){
+            let winpoint = 5;
+        }
+        if (x = 2){
+            let winpoint = 10;
+        }
+        if (x = 3){
+            let winpoint = 15;
+        }
+        return;
+    }
+
+    method void update(){
+        if (deterhitthefloor){
+            do Draw.drawgoalanime();
+            do Main.reset();
+            do Draw.drawpreparing();
+        }
+        return;
+    }
+
+    method void render(){
+        do Draw.drawFloor();
+        do Draw.drawpointboard(x, y);
+        return;
+    }
+    
+}

@@ -1,17 +1,27 @@
 class Draw {
-    static String title, speed, diffi, start, low, middle, high, easy, normal, hard, go;
+    static String title, speed, winpo, start, low, middle, high, 
+                    easy, normal, hard, ready, pointb, whites, five,
+                    ten, fifteen, end;
+
     function void init(){
-        let title = "                   Pikachu ball !";
-        let speed = "                   select speed !";
-        let diffi = "                 select difficulty !";
-        let start = "                      start !";
-        let low   = "                        low";
-        let middle= "                       middle";
-        let high  = "                        high";
-        let easy  = "                        easy";
-        let normal= "                       normal";
-        let hard  = "                        hard";
-        let go    = "                        go !";
+        let title = "                      Pikachu ball !";
+        let speed = "                      select speed !";
+        let winpo = "                     selset winpoint !";
+        let start = "                          start !";
+        let low   = "                           low";
+        let middle= "                          middle";
+        let high  = "                           high";
+        let easy  = "                           easy";
+        let normal= "                          normal";
+        let hard  = "                           hard";
+        let five  = "                             5";
+        let ten   = "                            10";
+        let fifteen="                            15";
+        let ready = "                          ready ?";
+        let end   = "                        game set !";
+        let whites= "                         ";
+        let pointb= "    :    ";
+        
         return;
     }
 
@@ -103,6 +113,14 @@ class Draw {
         return;
     }
 
+    function void drawPikachufaceright(int x, int y, boolean step){
+        if (step){
+            do Screen.drawLine(x+8, y, x+13, y);
+
+        }
+        return;
+    }
+
     function void drawPoint(int x, int y){
         do Screen.drawRectangle(x-250, y, x, y+2);
         do Screen.drawRectangle(x+40, y-26, x+56, y-24);
@@ -123,18 +141,23 @@ class Draw {
         return;
     }
 
-    function void drawball(int x, int y){
-        do Screen.drawPixel(x+20, y+4);
-        do Screen.drawPixel(x+20, y+3);
-        do Screen.drawPixel(x+20, y+2);
-        do Screen.drawPixel(x+20, y+1);
-        do Screen.drawPixel(x+20, y);
-        do Screen.drawPixel(x+20, y-1);
-        do Screen.drawPixel(x+20, y-2);
-        do Screen.drawPixel(x+20, y-3);
-        do Screen.drawPixel(x+20, y-4);
-        do Screen.drawPixel(x-20, y);
-        do Screen.drawPixel(x-20, y+1);
+    function void drawBall(int x, int y, int t){
+        if (t < 5){
+            do Screen.drawCircle(x, y, 30);
+            do Screen.setColor(0);
+            do Screen.drawCircle(x, y, 10);
+            do Screen.drawRectangle(x-28, y-3, x+28, y+3);
+            do Screen.setColor(1);
+            do Screen.drawCircle(x, y, 5);
+        }
+        else{
+            do Screen.drawCircle(x, y, 30);
+            do Screen.setColor(0);
+            do Screen.drawCircle(x, y, 10);
+            do Screen.drawRectangle(x-3, y-28, x+3, y+28);
+            do Screen.setColor(1);
+            do Screen.drawCircle(x, y, 5);
+        }
         return;
     }
 
@@ -143,9 +166,59 @@ class Draw {
         return;
     }
 
+    function void drawRod() {
+        do Screen.drawRectangle(244, 155, 246, 255);
+        return;
+    }
+
+    function void drawCloud(int x, int y) {
+        var int memAddress;
+        let memAddress = 16384 + x + (32 * y);
+        do Memory.poke(memAddress+0, 0);
+        do Memory.poke(memAddress+32, 0);
+        do Memory.poke(memAddress+64, 896);
+        do Memory.poke(memAddress+96, 3168);
+        do Memory.poke(memAddress+128, 6192);
+        do Memory.poke(memAddress+160, 24588);
+        do Memory.poke(memAddress+192, -32766);
+        do Memory.poke(memAddress+224, -32767);
+        do Memory.poke(memAddress+256, -32767);
+        do Memory.poke(memAddress+288, 16386);
+        do Memory.poke(memAddress+320, 8196);
+        do Memory.poke(memAddress+352, 7224);
+        do Memory.poke(memAddress+384, 960);
+        do Memory.poke(memAddress+416, 0);
+        do Memory.poke(memAddress+448, 0);
+        do Memory.poke(memAddress+480, 0);
+        return;
+    }
+
+    function void drawBabyball(int location) {
+        var int memAddress;
+        let memAddress = 16384+location;
+        do Memory.poke(memAddress+0, 2016);
+        do Memory.poke(memAddress+32, 8184);
+        do Memory.poke(memAddress+64, 16380);
+        do Memory.poke(memAddress+96, 32766);
+        do Memory.poke(memAddress+128, 32766);
+        do Memory.poke(memAddress+160, -1);
+        do Memory.poke(memAddress+192, -1);
+        do Memory.poke(memAddress+224, -24967);
+        do Memory.poke(memAddress+256, -7129);
+        do Memory.poke(memAddress+288, -24967);
+        do Memory.poke(memAddress+320, -31807);
+        do Memory.poke(memAddress+352, 16386);
+        do Memory.poke(memAddress+384, 16386);
+        do Memory.poke(memAddress+416, 8196);
+        do Memory.poke(memAddress+448, 6168);
+        do Memory.poke(memAddress+480, 2016);
+        return;
+    }
+    
     function void drawTitle(){
         do Screen.clearScreen();
-        do Draw.drawPikachu(400, 200);
+        do Draw.drawPikachu(407, 203);
+        do Draw.drawBabyball(6553);
         do Output.println();
         do Output.println();
         do Output.println();
@@ -163,7 +236,7 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString(diffi);
+        do Output.printString(winpo);
         do Output.println();
         do Output.println();
         do Output.println();
@@ -175,7 +248,19 @@ class Draw {
         do Output.println();
         return;
     }
-    
+
+    function void drawScene() {
+        do Draw.drawCloud(30, 30);
+        do Draw.drawCloud(0, 70);
+        do Draw.drawCloud(70, 10);
+        do Draw.drawCloud(300, 50);
+        do Draw.drawCloud(500, 40);
+        do Draw.drawFloor();
+        do Draw.drawRod();
+        do Draw.drawRod();
+        return;
+    }
+
     function void drawselectspeed(){
         do Screen.clearScreen();
         do Output.println();
@@ -208,9 +293,40 @@ class Draw {
         return;
     }
 
+    function void drawselectwinpoint(){
+        do Screen.clearScreen();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(winpo);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(five);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(ten);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(fifteen);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        return;
+    }
+
     function void drawpreparing(){
-        do Screen.clearScreen();
-        do Draw.drawFloor();
+        do ScreenManager.render();
         do Output.println();
         do Output.println();
         do Output.println();
@@ -221,8 +337,7 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString("                 ");
-        do Output.printString("          3");
+        do Output.printString(ready);
         do Output.println();
         do Output.println();
         do Output.println();
@@ -233,24 +348,28 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.println();
-        do Sys.wait(1000);
-        do Screen.clearScreen();
-        do Draw.drawFloor();
         do Output.println();
         do Output.println();
         do Output.println();
+        do Sys.wait(1500);
+        return;
+    }
+
+    function void drawpointboard(int x, int y){
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
+        do Output.printString(whites);
+        do Output.printInt(y);
+        do Output.printString(pointb);
+        do Output.printInt(x);
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString("                 ");
-        do Output.printString("          2");
         do Output.println();
         do Output.println();
         do Output.println();
@@ -261,24 +380,38 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.println();
-        do Sys.wait(1000);
-        do Screen.clearScreen();
-        do Draw.drawFloor();
         do Output.println();
         do Output.println();
         do Output.println();
+        return;
+    }
+
+    function void drawgoalanime(){
+        var int t;
+        let t = 0;
+        while(t < 10) {
+            do PhysicsManager.update();
+            if (Util.rem(t, 1) = 0) {
+                do ScreenManager.render();
+            }
+            let t = t + 1;
+            do Sys.wait(100);
+        }
+        return;
+    }
+
+    function void drawend(){
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
+        do Output.printString(end);
         do Output.println();
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString("                 ");
-        do Output.printString("          1");
         do Output.println();
         do Output.println();
         do Output.println();
@@ -289,34 +422,11 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.println();
-        do Sys.wait(1000);
-        do Screen.clearScreen();
-        do Draw.drawFloor();
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.printString("                 ");
-        do Output.printString("         Go!");
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Output.println();
-        do Sys.wait(1000);
+        // do Draw.drawpikachuwin();
+        // do Draw.drawpokachulose();
         return;
     }
 }

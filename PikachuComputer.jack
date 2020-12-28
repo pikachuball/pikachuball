@@ -1,19 +1,16 @@
-class Pikachu{
+class PikachuComputer {
 
-    field int x, y, vy, t, stopTime, smashTime;
-    field char smashDirection;
-    field boolean faceright, ontheair, sliding, stopping, smashing, pastColliding;
+    field int x, y, vy, smashDirection, t, stopTime, spikedir;
+    field boolean faceright, ontheair, sliding, stopping, spiking;
     static int dx, slide_x, sx, sy; // move per press, sizex, sizey
-    constructor Pikachu new(boolean fr) {
-        let x = 100;
+    constructor PikachuComputer new(boolean fr) {
+        let x = 411;
         let y = 180;
 
         let faceright = fr;
         let ontheair = false;
         let sliding = false;
         let stopping = false;
-        let smashing = false;
-        let pastColliding = false;
 
         let sx = 30;
         let sy = 60;
@@ -73,11 +70,11 @@ class Pikachu{
     }
 
     method void wallPrevent() {
-        if(x < 0) {
-            let x = 0;
+        if(x > (512-1-sx)) {
+            let x = (512-1-sx);
         }
-        if(x > (244-1-sx)) {
-            let x = 244-sx;
+        if(x < 246) {
+            let x = 246;
         }
         return;
     }
@@ -85,7 +82,6 @@ class Pikachu{
     method void statusChange() {
         if (y > (Phys.getGround()-1-sy)) {
             let ontheair = false;
-            let smashing = false;
             if (sliding){
                 let stopping = true;
                 let sliding = false;
@@ -100,80 +96,23 @@ class Pikachu{
     method void interactWithBall() {
         var Ball b;
         let b = PhysicsManager.getBall();
-        if (smashing) {
-            do smashBall();
+        if (spiking){
+            do spike();
+            let spiking = false;
         }
-        else {
-            do hitBall();
-        }
-        return;
-    }
-
-    method void smashBall() {
-        var int bx, by;
-        var Ball b;
-        var boolean decided;
-        let decided = false;
-        let b = PhysicsManager.getBall();
-        let smashing = false;
-        if ((smashDirection = 130) | (smashDirection = 132)) {
-            let bx = 30;
-            let by = -2;
-            let decided = true;
-        }
-        if (smashDirection = 131) {
-            let bx = 25;
-            let by = -30;
-            let decided = true;
-        }
-        if (smashDirection = 133) {
-            let bx = 15;
-            let by = 10;
-            let decided = true;
-        }
-        if(~decided) {
-            let bx = 6;
-            let by = 0;
-        }
-        do b.setVx(bx);
-        do b.setVy(by);
-        return;
-    }
-
-    method void hitBall() {
-        var Ball b;
-        var int nvx;
-        let b = PhysicsManager.getBall();
-        // if (faceright) {
-        //     let nvx = 20;
-        // }
-        // else {
-        //     let nvx = -20;
-        // }
-        do b.setVx(20);
-        do b.setVy(-20);
-        return;
-    }
-
-    method int collideWithBall() {
-        var boolean isColliding;
-        let isColliding = collisionDetection();
-        if (isColliding) {
-            if (pastColliding) {
-                return false;
+        else{
+            if (faceright) {
+                do b.setVx(15);
             }
             else {
-                let pastColliding = true;
-                return true;
+                do b.setVx(-15);
             }
+            do b.setVy(-15);
         }
-        else {
-            let pastColliding = false;
-            return false;
-        }
+        return;
     }
 
-    method boolean collisionDetection() {
+    method boolean collideWithBall() {
         var Ball b;
         var int bx, by, r;
         let b = PhysicsManager.getBall();
@@ -229,7 +168,7 @@ class Pikachu{
             do slidex(faceright);
         }
         else{
-            do keyInput();            
+            //do keyInput();            
         }
         do movey();
         do gravity();
@@ -256,9 +195,16 @@ class Pikachu{
         return;
     }
 
-    method void spike() {
-        let smashing = true;
-        let smashDirection = 0;
+    method void spike(){
+        var Ball b;
+        var int smashSpeedx, smashSpeedy;
+        let b = PhysicsManager.getBall();
+        let smashSpeedx = 20;
+        let smashSpeedy = 20;
+        if (ontheair & (x = 133)) {
+            do b.setVx(smashSpeedx);
+            do b.setVy(smashSpeedy);
+        }
         return;
     }
 
@@ -270,34 +216,26 @@ class Pikachu{
         return;
     }
 
-    method boolean isValidSmashDirection(char c) {
-        return (129 < c) & (c < 134); // is an arrow key
-    }
-
     method void keyInput() {
         var char c;
         let c = Keyboard.keyPressed();
-        if(smashing) {
-            if (isValidSmashDirection(c)) {
-                let smashDirection = c;
-            }
-        }
         if (c = 130){
             do movex(0);
-            let faceright = false ;    //left
+            let faceright = false ;   //left
         }
         if (c = 132) {
             do movex(-1);
             let faceright = true ;     //right
         }
-        if (~(ontheair) & c = 131){    // up
+        if (~(ontheair) & c = 131){
             do jump();
         }
-        if (~(ontheair) & (c = 133)){  // down
+        if (~(ontheair) & c = 133){
             do slide();
         }
         if (ontheair & (c = 128)){
-            do spike();
+            do Output.backSpace();
+            let spiking = true;
         }
         return;
     }
@@ -307,15 +245,15 @@ class Pikachu{
         var Ball b;
         let r = PhysicsManager.getRod();
         let b = PhysicsManager.getBall();
-        return (b.getx() > r.getRight());
+        return (b.getx() < r.getLeft());
     }
 
     method void reset(){
-        let x = 100;
+        let x = 411;
         let y = 180;
         let vy = 0;
         
-        let faceright = true;
+        let faceright = false;
         let ontheair = false;
         let sliding = false;
         let stopping = false;
