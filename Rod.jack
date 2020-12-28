@@ -50,11 +50,6 @@ class Rod {
         return;
     }
 
-    method void render() {
-        do Screen.drawRectangle(x, y, x+sx, y+sy);
-        return;
-    }
-
     method int getRight() {
         return x + sx;
     }

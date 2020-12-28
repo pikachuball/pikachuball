@@ -33,6 +33,7 @@ class Floor {
     }
 
     method void render(){
+        do Draw.drawFloor();
         do Draw.drawpointboard(x, y);
         return;
     }

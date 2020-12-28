@@ -1,10 +1,10 @@
-class Pikachu{
+class PikachuComputer {
 
     field int x, y, vy, smashDirection, t, stopTime, spikedir;
     field boolean faceright, ontheair, sliding, stopping, spiking;
     static int dx, slide_x, sx, sy; // move per press, sizex, sizey
-    constructor Pikachu new(boolean fr) {
-        let x = 100;
+    constructor PikachuComputer new(boolean fr) {
+        let x = 411;
         let y = 180;
 
         let faceright = fr;
@@ -70,11 +70,11 @@ class Pikachu{
     }
 
     method void wallPrevent() {
-        if(x < 0) {
-            let x = 0;
+        if(x > (512-1-sx)) {
+            let x = (512-1-sx);
         }
-        if(x > (244-1-sx)) {
-            let x = 244-sx;
+        if(x < 246) {
+            let x = 246;
         }
         return;
     }
@@ -107,7 +107,6 @@ class Pikachu{
             else {
                 do b.setVx(-15);
             }
-            
             do b.setVy(-15);
         }
         return;
@@ -169,7 +168,7 @@ class Pikachu{
             do slidex(faceright);
         }
         else{
-            do keyInput();            
+            //do keyInput();            
         }
         do movey();
         do gravity();
@@ -246,15 +245,15 @@ class Pikachu{
         var Ball b;
         let r = PhysicsManager.getRod();
         let b = PhysicsManager.getBall();
-        return (b.getx() > r.getRight());
+        return (b.getx() < r.getLeft());
     }
 
     method void reset(){
-        let x = 100;
+        let x = 411;
         let y = 180;
         let vy = 0;
         
-        let faceright = true;
+        let faceright = false;
         let ontheair = false;
         let sliding = false;
         let stopping = false;
