@@ -102,6 +102,8 @@ class Point {
     }
 
     method void selectwinpoint(){
+        var Floor f;
+        let f = PhysicsManager.getFloor();
         do setSelect(false);
         do init();
         while(~(select)){
@@ -110,7 +112,7 @@ class Point {
             do keyInput();
             do boundprevent();
         }
-        do Main.setwinpoint(t);
+        do f.setwinpoint(t);
         do setSelect(false);
         do init();
         return;

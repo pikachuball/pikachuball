@@ -1,6 +1,6 @@
 class Main {
 
-    static int t, updaterate, winpoint;
+    static int t, updaterate;
     static boolean selecting, playing;
 
     static Pikachu p;
@@ -65,19 +65,6 @@ class Main {
         }
         if (x = 3){
             let updaterate = 20;
-        }
-        return;
-    }
-
-    function void setwinpoint(int x){
-        if (x = 1){
-            let winpoint = 5;
-        }
-        if (x = 2){
-            let winpoint = 10;
-        }
-        if (x = 3){
-            let winpoint = 15;
         }
         return;
     }

@@ -1,5 +1,5 @@
 class Floor {
-    field int x, y;
+    field int x, y, winpoint;
     field boolean deterhitthefloor;
 
     constructor Floor new(){
@@ -13,12 +13,34 @@ class Floor {
         return;
     }
 
+    method void deterwin(){
+        if (x = winpoint | y = winpoint){
+            do Draw.drawend();
+            do Sys.wait(1000);
+            //do Main.restart();
+        }
+        return;
+    }
+
     method void setpoint(int k){
         if (k < 245){
             let x = x + 1;
         }
         else{
             let y = y + 1;
+        }
+        return;
+    }
+
+    method void setwinpoint(int x){
+        if (x = 1){
+            let winpoint = 5;
+        }
+        if (x = 2){
+            let winpoint = 10;
+        }
+        if (x = 3){
+            let winpoint = 15;
         }
         return;
     }
