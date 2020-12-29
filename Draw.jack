@@ -1,11 +1,12 @@
 class Draw {
-    static String title, speed, diffi, start, low, middle, high, 
-                    easy, normal, hard, ready, pointb, whites;
+    static String title, speed, winpo, start, low, middle, high, 
+                    easy, normal, hard, ready, pointb, whites, five,
+                    ten, fifteen;
 
     function void init(){
         let title = "                      Pikachu ball !";
         let speed = "                      select speed !";
-        let diffi = "                    select difficulty !";
+        let winpo = "                     selset winpoint !";
         let start = "                          start !";
         let low   = "                           low";
         let middle= "                          middle";
@@ -13,6 +14,9 @@ class Draw {
         let easy  = "                           easy";
         let normal= "                          normal";
         let hard  = "                           hard";
+        let five  = "                             5";
+        let ten   = "                            10";
+        let fifteen="                            15";
         let ready = "                          ready ?";
         let whites= "                         ";
         let pointb= "    :    ";
@@ -231,7 +235,7 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.println();
-        do Output.printString(diffi);
+        do Output.printString(winpo);
         do Output.println();
         do Output.println();
         do Output.println();
@@ -282,6 +286,38 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.printString(high);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        return;
+    }
+
+    function void drawselectwinpoint(){
+        do Screen.clearScreen();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(winpo);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(five);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(ten);
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(fifteen);
         do Output.println();
         do Output.println();
         do Output.println();
