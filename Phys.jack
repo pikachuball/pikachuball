@@ -1,9 +1,10 @@
 class Phys {
-    static int dt, dvy, ground;
+    static int dt, dvy, g, ground;
 
     function void init() {
         let dt = 1;
         let dvy = 1;
+        let g = dvy/dt;
         let ground = 240;
         return;
     }
@@ -16,7 +17,29 @@ class Phys {
         return dvy;
     }
 
+    function int getG() {
+        return g;
+    }
+
     function int getGround(){
         return ground;
+    }
+
+    function boolean canReach(int orig, int v, int target) { // v(=0)^2 = v0^2 + 2g * dy
+        var int dx, end;
+        let dx = -v*v/2/g;
+        let end = orig + target;
+        if (((orig-target)*(end-target)) < 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    function int calculateX(int x, int y, int vx, int vy, int ty) {
+        var int t;
+        let t = Util.solveEquation(g, vy, y-ty);
+        return x + (vx*t);
     }
 }

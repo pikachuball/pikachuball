@@ -1,7 +1,7 @@
 class PikachuComputer {
 
     field int x, y, vy, smashDirection, t, stopTime, spikedir;
-    field boolean faceright, ontheair, sliding, stopping, spiking;
+    field boolean faceright, ontheair, sliding, stopping, spiking, pastColliding;
     static int dx, slide_x, sx, sy; // move per press, sizex, sizey
     constructor PikachuComputer new(boolean fr) {
         let x = 411;
@@ -11,11 +11,12 @@ class PikachuComputer {
         let ontheair = false;
         let sliding = false;
         let stopping = false;
+        let pastColliding = false;
 
         let sx = 30;
         let sy = 60;
 
-        let dx = 5;
+        let dx = 12;
         let slide_x = 10;
         return this;
     }
@@ -112,7 +113,25 @@ class PikachuComputer {
         return;
     }
 
-    method boolean collideWithBall() {
+    method int collideWithBall() {
+        var boolean isColliding;
+        let isColliding = collisionDetection();
+        if (isColliding) {
+            if (pastColliding) {
+                return false;
+            }
+            else {
+                let pastColliding = true;
+                return true;
+            }
+        }
+        else {
+            let pastColliding = false;
+            return false;
+        }
+    }
+
+    method boolean collisionDetection() {
         var Ball b;
         var int bx, by, r;
         let b = PhysicsManager.getBall();
@@ -168,7 +187,7 @@ class PikachuComputer {
             do slidex(faceright);
         }
         else{
-            //do keyInput();            
+            do decide();          
         }
         do movey();
         do gravity();
@@ -215,27 +234,28 @@ class PikachuComputer {
         let stopTime = t;
         return;
     }
+    method void decide() {
+        do moveToLanding();
+        return;
+    }
 
-    method void keyInput() {
-        var char c;
-        let c = Keyboard.keyPressed();
-        if (c = 130){
+    method void moveToLanding() {
+        var int nx, mx;
+        var Rod r;
+
+        let r = PhysicsManager.getRod();
+        
+        let nx = Util.calculateLanding(PhysicsManager.getBall(), y, y+sy);
+        if (nx < r.getLeft()) {
+            return;
+        }
+        // do Screen.drawRectangle(nx, 0, nx+15, 20);
+        let mx = x+(sx/2);
+        if (nx < mx) {
             do movex(0);
-            let faceright = false ;   //left
         }
-        if (c = 132) {
+        else {
             do movex(-1);
-            let faceright = true ;     //right
-        }
-        if (~(ontheair) & c = 131){
-            do jump();
-        }
-        if (~(ontheair) & c = 133){
-            do slide();
-        }
-        if (ontheair & (c = 128)){
-            do Output.backSpace();
-            let spiking = true;
         }
         return;
     }
