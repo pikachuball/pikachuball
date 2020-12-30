@@ -34,4 +34,8 @@ class PhysicsManager {
     function Floor getFloor() {
         return f;
     }
+
+    function Pikachu getPlayer() {
+        return p;
+    }
 }

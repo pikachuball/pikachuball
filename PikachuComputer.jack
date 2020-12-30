@@ -82,7 +82,7 @@ class PikachuComputer {
 
     method void interactWithBall() {
         if (ontheair) {
-            do smashBall(132);
+            do smashBall(decideSmashDirection());
         }
         else {
             do hitBall();
@@ -90,19 +90,42 @@ class PikachuComputer {
         return;
     }
 
-    method void smashBall(char smashDirection) {
-        let chasing = true;
-        if((smashDirection = 130) | (smashDirection = 132)) {
-            do smashLeft();
+    method char decideSmashDirection() {
+        var Pikachu p;
+        var int px, py;
+        var boolean pair;
+        let p = PhysicsManager.getPlayer();
+        let px = p.getx();
+        let py = p.gety();
+        let pair = p.getOnTheAir();
+        if ((px > 183) & pair) {
+            return 131;
         }
-        return;
+        if (x < 290) {
+            return 133;
+        }
+        return 132;
     }
 
-    method void smashLeft() {
+    method void smashBall(char smashDirection) {
         var Ball b;
+        var int nx, ny;
         let b = PhysicsManager.getBall();
-        do b.setVx(-30);
-        do b.setVy(-2);
+        let chasing = true;
+        if((smashDirection = 130) | (smashDirection = 132)) {
+            let nx = -30;
+            let ny = -2;
+        }
+        if (smashDirection = 131) {
+            let nx = -35;
+            let ny = -25;
+        }
+        if (smashDirection = 133) {
+            let nx = -15;
+            let ny = 10;
+        }
+        do b.setVx(nx);
+        do b.setVy(ny);
         return;
     }
 
