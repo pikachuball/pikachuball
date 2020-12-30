@@ -130,8 +130,8 @@ class Pikachu{
             let by = -2;
         }
         if (smashDirection = 131) {
-            let bx = 25;
-            let by = -30;
+            let bx = 35;
+            let by = -25;
         }
         if (smashDirection = 133) {
             let bx = 15;
