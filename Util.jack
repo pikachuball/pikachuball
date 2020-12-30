@@ -43,4 +43,52 @@ class Util {
         }
         return Math.sqrt(dy);
     }
+
+    function int calculateLanding(Ball b, int y1, int y2) {
+        var int bx, by, vx, vy, r, x1, x2, wx;
+        let bx = b.getx();
+        let by = b.gety();
+        let vx = b.getvx();
+        let vy = b.getvy();
+        let r = b.size();
+        if (Phys.canReach(by, vy, r)) {
+            let bx = Phys.calculateX(bx, by, vx, vy, r);
+            let by = r;
+            let vy = -vy;
+        }
+        let x1 = Phys.calculateX(bx, by, vx, vy, y1);
+        let x2 = Phys.calculateX(bx, by, vx, vy, y2);
+        let bx = (x1+x2)/2;
+        let wx = 511-r;
+        if (bx > wx) {
+            let bx = wx - (bx - wx);
+        }
+        return bx;
+    }
+
+    function int solveEquation(int a2, int b, int c) { // a2 = 2*a since it's often 1/2
+        /** returns the smallest positive solution */
+        var int x1, x2, delta;
+        let delta = Util.safeSqrt((b*b)-(2*a2*c));
+        let x1 = (-b+delta)/a2; // bigger
+        let x2 = (-b-delta)/a2; // smaller
+        if (x1 < 0) {
+            return 0; // supposed to be an error
+        }
+        if (x2 < 0) { // if the smaller is too small, return the bigger
+            return x1;
+        }
+        else { // else return the smaller one
+            return x2;
+        }
+    }
+
+    function int safeSqrt(int x) {
+        if(x > 0) {
+            return Math.sqrt(x);
+        }
+        else {
+            return 32767;
+        }
+    }
 }

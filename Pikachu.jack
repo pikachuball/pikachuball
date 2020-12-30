@@ -82,6 +82,14 @@ class Pikachu{
         return;
     }
 
+    method void swapAxis() {
+        var int temp;
+        let temp = sx;
+        let sx = sy;
+        let sy = temp;
+        return;
+    }
+
     method void statusChange() {
         if (y > (Phys.getGround()-1-sy)) {
             let ontheair = false;
@@ -89,6 +97,7 @@ class Pikachu{
             if (sliding){
                 let stopping = true;
                 let sliding = false;
+                do swapAxis();
             }
         }
         else {
@@ -111,15 +120,15 @@ class Pikachu{
 
     method void smashBall() {
         var int bx, by;
-        var Ball b;
         var boolean decided;
-        let decided = false;
+        var Ball b;
+        let bx = 6;
+        let by = 0;
         let b = PhysicsManager.getBall();
         let smashing = false;
         if ((smashDirection = 130) | (smashDirection = 132)) {
             let bx = 20;
             let by = -2;
-            let decided = true;
         }
         if (smashDirection = 131) {
             let bx = 20;
@@ -233,26 +242,15 @@ class Pikachu{
         }
         do movey();
         do gravity();
+        do statusChange();
         do groundPrevent();
         do wallPrevent();
-        do statusChange();
         return;
     }
 
 
     method void render() {
-        if (~(sliding)){
-            do Screen.drawRectangle(x, y, x+sx, y+sy);
-        }
-        else{
-            if (faceright){
-                do Screen.drawRectangle(x, y, x+sy, y+sx);
-            }
-            else{
-                do Screen.drawRectangle(x, y, x+sy, y+sx);
-            }
-            
-        }
+        do Draw.drawPikachufaceright(x, y, 0);
         return;
     }
 
@@ -264,6 +262,7 @@ class Pikachu{
 
     method void slide(){
         let vy = -5;
+        do swapAxis();
         let ontheair = true;
         let sliding = true;
         let stopTime = t;
@@ -293,11 +292,13 @@ class Pikachu{
         if (~(ontheair) & c = 131){    // up
             do jump();
         }
-        if (~(ontheair) & (c = 133)){  // down
-            do slide();
-        }
-        if (ontheair & (c = 128)){
-            do spike();
+        if (c = 128) { // enter
+            if (ontheair) {
+                do spike();
+            }
+            else {
+                do slide();
+            }
         }
         return;
     }
@@ -310,6 +311,18 @@ class Pikachu{
         return (b.getx() > r.getRight());
     }
 
+    method int getx() {
+        return x + (sx/2);
+    }
+
+    method int gety() {
+        return y + (sy/2);
+    }
+
+    method boolean getOnTheAir() {
+        return ontheair;
+    }
+
     method void reset(){
         let x = 100;
         let y = 180;
@@ -317,6 +330,9 @@ class Pikachu{
         
         let faceright = true;
         let ontheair = false;
+        if (sliding) {
+            do swapAxis();
+        }
         let sliding = false;
         let stopping = false;
 
