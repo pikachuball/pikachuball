@@ -293,11 +293,13 @@ class Pikachu{
         if (~(ontheair) & c = 131){    // up
             do jump();
         }
-        if (~(ontheair) & (c = 133)){  // down
-            do slide();
-        }
-        if (ontheair & (c = 128)){
-            do spike();
+        if (c = 128) { // enter
+            if (ontheair) {
+                do spike();
+            }
+            else {
+                do slide();
+            }
         }
         return;
     }
