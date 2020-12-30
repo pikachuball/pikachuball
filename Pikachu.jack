@@ -82,6 +82,14 @@ class Pikachu{
         return;
     }
 
+    method void swapAxis() {
+        var int temp;
+        let temp = sx;
+        let sx = sy;
+        let sy = temp;
+        return;
+    }
+
     method void statusChange() {
         if (y > (Phys.getGround()-1-sy)) {
             let ontheair = false;
@@ -89,6 +97,7 @@ class Pikachu{
             if (sliding){
                 let stopping = true;
                 let sliding = false;
+                do swapAxis();
             }
         }
         else {
@@ -233,26 +242,15 @@ class Pikachu{
         }
         do movey();
         do gravity();
+        do statusChange();
         do groundPrevent();
         do wallPrevent();
-        do statusChange();
         return;
     }
 
 
     method void render() {
-        if (~(sliding)){
-            do Screen.drawRectangle(x, y, x+sx, y+sy);
-        }
-        else{
-            if (faceright){
-                do Screen.drawRectangle(x, y, x+sy, y+sx);
-            }
-            else{
-                do Screen.drawRectangle(x, y, x+sy, y+sx);
-            }
-            
-        }
+        do Screen.drawRectangle(x, y, x+sx, y+sy);
         return;
     }
 
@@ -264,6 +262,7 @@ class Pikachu{
 
     method void slide(){
         let vy = -5;
+        do swapAxis();
         let ontheair = true;
         let sliding = true;
         let stopTime = t;
@@ -319,6 +318,9 @@ class Pikachu{
         
         let faceright = true;
         let ontheair = false;
+        if (sliding) {
+            do swapAxis();
+        }
         let sliding = false;
         let stopping = false;
 
