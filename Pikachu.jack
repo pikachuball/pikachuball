@@ -117,13 +117,13 @@ class Pikachu{
         let b = PhysicsManager.getBall();
         let smashing = false;
         if ((smashDirection = 130) | (smashDirection = 132)) {
-            let bx = 30;
+            let bx = 20;
             let by = -2;
             let decided = true;
         }
         if (smashDirection = 131) {
-            let bx = 25;
-            let by = -30;
+            let bx = 20;
+            let by = -15;
             let decided = true;
         }
         if (smashDirection = 133) {
@@ -132,7 +132,7 @@ class Pikachu{
             let decided = true;
         }
         if(~decided) {
-            let bx = 6;
+            let bx = 10;
             let by = 0;
         }
         do b.setVx(bx);
@@ -150,8 +150,8 @@ class Pikachu{
         // else {
         //     let nvx = -20;
         // }
-        do b.setVx(20);
-        do b.setVy(-20);
+        do b.setVx(15);
+        do b.setVy(-15);
         return;
     }
 

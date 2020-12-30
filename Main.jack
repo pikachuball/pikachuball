@@ -44,11 +44,9 @@ class Main {
         while(playing) {
             // TODO: split rendering and updating
             do PhysicsManager.update();
-            if (Util.rem(t, 1) = 0) {
-                do ScreenManager.render();
-            }
+            do ScreenManager.render();
             let t = t + 1;
-            if (t > 6000) {
+            if (t = 6000) {
                 let t = 0;
             }
             do Sys.wait(updaterate);
@@ -72,7 +70,7 @@ class Main {
     function void reset(){
         do p.reset();
         do pc.reset();
-        do b.reset();
+        do b.reset(f.getxwin());
         return;
     }
 }

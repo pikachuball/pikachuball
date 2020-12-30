@@ -1,6 +1,6 @@
 class Floor {
     field int x, y, winpoint;
-    field boolean deterhitthefloor;
+    field boolean xwin, hitTheFloor;
 
     constructor Floor new(){
         let x = 0;
@@ -8,8 +8,12 @@ class Floor {
         return this;
     }
 
-    method void setdeterhitthefloor(boolean b){
-        let deterhitthefloor = b;
+    method boolean getxwin(){
+        return xwin;
+    }
+
+    method void setDeterHitTheFloor(boolean b){
+        let hitTheFloor = b;
         return;
     }
 
@@ -23,11 +27,13 @@ class Floor {
     }
 
     method void setpoint(int k){
-        if (k < 245){
+        if (k > 245){
             let x = x + 1;
+            let xwin = true;
         }
         else{
             let y = y + 1;
+            let xwin = false;
         }
         return;
     }
@@ -46,7 +52,7 @@ class Floor {
     }
 
     method void update(){
-        if (deterhitthefloor){
+        if (hitTheFloor){
             do Draw.drawgoalanime();
             do Main.reset();
             do Draw.drawpreparing();

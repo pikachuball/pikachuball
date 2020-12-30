@@ -56,7 +56,7 @@ class Ball {
     method void boundsPrevent() {
         var Floor f;
         let f = PhysicsManager.getFloor();
-        do f.setdeterhitthefloor(false);
+        do f.setDeterHitTheFloor(false);
         if (y > (Phys.getGround()-r-1)) {
             let vy = -Math.abs(vy) * 7 / 10;
             let y = Phys.getGround()-r;
@@ -65,7 +65,7 @@ class Ball {
                 let vy = 0;
             }
             
-            do f.setdeterhitthefloor(true);
+            do f.setDeterHitTheFloor(true);
             do f.setpoint(x);
         }
         if (y < (r+1)) {
@@ -128,13 +128,19 @@ class Ball {
         return;
     }
 
-    method void reset(){
-        let x = 100;
-        let y = 30;
-        let vx = 0;
-        let vy = 0;
-        let px = 30;
-        let py = 30;
+    method void reset(boolean xwin){
+        if (xwin){
+            let x = 100;
+            let y = 30;
+            let vx = 0;
+            let vy = 0;
+        }
+        else{
+            let x = 411;
+            let y = 30;
+            let vx = 0;
+            let vy = 0;
+        }
         return;
     }
 }

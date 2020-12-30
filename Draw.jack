@@ -361,9 +361,9 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.printString(whites);
-        do Output.printInt(y);
-        do Output.printString(pointb);
         do Output.printInt(x);
+        do Output.printString(pointb);
+        do Output.printInt(y);
         do Output.println();
         do Output.println();
         do Output.println();
