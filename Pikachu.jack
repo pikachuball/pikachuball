@@ -15,7 +15,7 @@ class Pikachu{
         let smashing = false;
         let pastColliding = false;
 
-        let sx = 30;
+        let sx = 40;
         let sy = 60;
 
         let dx = 5;
@@ -87,6 +87,7 @@ class Pikachu{
         let temp = sx;
         let sx = sy;
         let sy = temp;
+        do groundPrevent();
         return;
     }
 
@@ -250,7 +251,17 @@ class Pikachu{
 
 
     method void render() {
-        do Draw.drawPikachufaceright(x, y, 0);
+        if (sliding) {
+            if (faceright) {
+                do Draw.drawPikachuSlideRight(x, y, 0);
+            }
+            else {
+                do Draw.drawPikachuSlideLeft(x, y, 0);
+            }
+        }
+        else {
+            do Draw.drawPikachufaceright(x, y, 0);
+        }
         return;
     }
 
@@ -262,10 +273,10 @@ class Pikachu{
 
     method void slide(){
         let vy = -5;
-        do swapAxis();
         let ontheair = true;
         let sliding = true;
         let stopTime = t;
+        do swapAxis();
         return;
     }
 
