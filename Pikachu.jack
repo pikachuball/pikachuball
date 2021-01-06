@@ -130,6 +130,7 @@ class Pikachu{
         if ((smashDirection = 130) | (smashDirection = 132)) {
             let bx = 20;
             let by = -2;
+            let decided = true;
         }
         if (smashDirection = 131) {
             let bx = 20;
@@ -153,15 +154,22 @@ class Pikachu{
     method void hitBall() {
         var Ball b;
         var int nvx;
+        let nvx = 15;
         let b = PhysicsManager.getBall();
-        // if (faceright) {
-        //     let nvx = 20;
-        // }
-        // else {
-        //     let nvx = -20;
-        // }
-        do b.setVx(15);
-        do b.setVy(-15);
+        do b.setVy(-nvx);
+        if (sliding) {
+            if (~faceright) {
+                let nvx = -nvx;
+            }
+            do b.setVx(nvx);
+            return;
+        }
+        if (ontheair | (b.getvx() = 0)) {
+            do b.setVx(nvx);
+        }
+        else {
+            do b.setVx(0);
+        }
         return;
     }
 

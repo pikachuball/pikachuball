@@ -98,7 +98,10 @@ class PikachuComputer {
         let px = p.getx();
         let py = p.gety();
         let pair = p.getOnTheAir();
-        if ((px > 183) & pair) {
+        if (y > (Phys.getGround() - 100)) {
+            return 131;
+        }
+        if ((px > 183) & pair & (x < 320)) {
             return 131;
         }
         if (x < 290) {

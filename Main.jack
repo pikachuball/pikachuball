@@ -69,6 +69,7 @@ class Main {
     }
 
     function void reset(){
+        let t = 0;
         do p.reset();
         do pc.reset();
         do b.reset(f.getxwin());
