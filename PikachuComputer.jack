@@ -1,11 +1,12 @@
 class PikachuComputer {
 
-    field int x, y, vy, jumpV, t, hitTime;
+    field int x, y, vy, jumpV, t, hitTime, step;
     field boolean faceright, ontheair, pastColliding, chasing;
     static int dx, sx, sy; // move per press, sizex, sizey
     constructor PikachuComputer new(boolean fr) {
         let x = 411;
         let y = 180;
+        let step = 0;
 
         let faceright = fr;
         let ontheair = false;
@@ -217,7 +218,11 @@ class PikachuComputer {
 
 
     method void render() {
-        do Draw.drawPikachufaceleft(x, y, 0);
+        do Draw.drawPikachufaceleft(x, y, step);
+        let step = step + 1;
+        if (step = 10){
+            let step = 0;
+        }
         return;
     }
 
