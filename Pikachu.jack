@@ -1,12 +1,13 @@
 class Pikachu{
 
-    field int x, y, vy, t, stopTime, smashTime;
+    field int x, y, vy, t, stopTime, smashTime, step;
     field char smashDirection;
     field boolean faceright, ontheair, sliding, stopping, smashing, pastColliding;
     static int dx, slide_x, sx, sy; // move per press, sizex, sizey
     constructor Pikachu new(boolean fr) {
         let x = 100;
         let y = 180;
+        let step = 0;
 
         let faceright = fr;
         let ontheair = false;
@@ -268,7 +269,11 @@ class Pikachu{
             }
         }
         else {
-            do Draw.drawPikachufaceright(x, y, 0);
+            do Draw.drawPikachufaceright(x, y, step);
+            let step = step + 1;
+            if (step = 10){
+                let step = 0;
+            }
         }
         return;
     }
