@@ -5,6 +5,7 @@ class Floor {
     constructor Floor new(){
         let x = 0;
         let y = 0;
+        let hitTheFloor = false;
         return this;
     }
 
@@ -15,6 +16,10 @@ class Floor {
     method void setDeterHitTheFloor(boolean b){
         let hitTheFloor = b;
         return;
+    }
+
+    method boolean ballAlive() {
+        return ~hitTheFloor;
     }
 
     method void deterwin(){
