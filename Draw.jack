@@ -3,7 +3,7 @@ class Draw {
                     easy, normal, hard, ready, pointb, whites, five,
                     ten, fifteen, end;
 
-    function void init(){
+    function void init() {
         let title = "                      Pikachu ball !";
         let speed = "                      select speed !";
         let winpo = "                     selset winpoint !";
@@ -527,8 +527,8 @@ class Draw {
         return;
     }
 
-    function void drawPikachufaceright(int x, int y, int step){
-        if (step < 5){
+    function void drawPikachufaceright(int x, int y, int step) {
+        if (step < 5) {
             do Screen.drawPixel(x+28, y+0);
             do Screen.drawPixel(x+27, y+0);
             do Screen.drawPixel(x+26, y+0);
@@ -1778,8 +1778,8 @@ class Draw {
         return;
     }
 
-    function void drawPikachufaceleft(int x, int y, int step){
-        if (step < 5){
+    function void drawPikachufaceleft(int x, int y, int step) {
+        if (step < 5) {
             do Screen.drawPixel(x+11, y+0);
             do Screen.drawPixel(x+12, y+0);
             do Screen.drawPixel(x+13, y+0);
@@ -2615,7 +2615,7 @@ class Draw {
         return;
     }
 
-    function void drawPoint(int x, int y){
+    function void drawPoint(int x, int y) {
         do Screen.drawRectangle(x-250, y, x, y+2);
         do Screen.drawRectangle(x+40, y-26, x+56, y-24);
         do Screen.drawPixel(x+45, y-29);
@@ -2635,8 +2635,8 @@ class Draw {
         return;
     }
 
-    function void drawBall(int x, int y, int t){
-        if (t < 5){
+    function void drawBall(int x, int y, int t) {
+        if (t < 5) {
             do Screen.drawCircle(x, y, 30);
             do Screen.setColor(0);
             do Screen.drawCircle(x, y, 10);
@@ -2709,7 +2709,7 @@ class Draw {
         return;
     }
     
-    function void drawTitle(){
+    function void drawTitle() {
         do Screen.clearScreen();
         do Draw.drawPikachu(407, 203);
         do Draw.drawBabyball(6553);
@@ -2755,7 +2755,7 @@ class Draw {
         return;
     }
 
-    function void drawselectspeed(){
+    function void drawselectspeed() {
         do Screen.clearScreen();
         do Output.println();
         do Output.println();
@@ -2787,7 +2787,7 @@ class Draw {
         return;
     }
 
-    function void drawselectwinpoint(){
+    function void drawselectwinpoint() {
         do Screen.clearScreen();
         do Output.println();
         do Output.println();
@@ -2819,7 +2819,7 @@ class Draw {
         return;
     }
 
-    function void drawpreparing(){
+    function void drawpreparing() {
         do ScreenManager.render();
         do Output.println();
         do Output.println();
@@ -2849,7 +2849,7 @@ class Draw {
         return;
     }
 
-    function void drawpointboard(int x, int y){
+    function void drawpointboard(int x, int y) {
         do Output.println();
         do Output.println();
         do Output.println();
@@ -2880,7 +2880,7 @@ class Draw {
         return;
     }
 
-    function void drawgoalanime(){
+    function void drawgoalanime() {
         var int t;
         let t = 0;
         while(t < 10) {
@@ -2894,7 +2894,7 @@ class Draw {
         return;
     }
 
-    function void drawend(){
+    function void drawend() {
         do Output.println();
         do Output.println();
         do Output.println();
