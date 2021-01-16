@@ -47,9 +47,6 @@ class Main {
                 do ScreenManager.render();
             }
             let t = t + 1;
-            if (t = 6000) {
-                let t = 0;
-            }
             do Sys.wait(updaterate);
         }
         return;
@@ -69,7 +66,6 @@ class Main {
     }
 
     function void reset(){
-        let t = 0;
         do p.reset();
         do pc.reset();
         do b.reset(f.getxwin());
