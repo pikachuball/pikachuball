@@ -3,8 +3,6 @@ class Floor {
     field boolean xwin, hitTheFloor;
 
     constructor Floor new(){
-        let x = 0;
-        let y = 0;
         return this;
     }
 
@@ -17,22 +15,52 @@ class Floor {
         return;
     }
 
-    method void deterwin(){
+    method boolean deterwin(){
+        var Pikachu p;
+        var PikachuComputer pc;
+
+        let p = PhysicsManager.getPikachu();
+        let pc = PhysicsManager.getPikachuComputer();
+
+        let x = p.getPoint();
+        let y = pc.getPoint();
+
         if (x = winpoint | y = winpoint){
-            do Draw.drawend();
+            do p.setEnd(true);
+            do pc.setEnd(true);
+
+            if (x > y){
+                do p.setResult(true);
+                do pc.setResult(false);
+            }
+            else{
+                do p.setResult(false);
+                do pc.setResult(true);
+            }
+            
+            do Draw.drawendanime();
             do Sys.wait(1000);
-            //do Main.restart();
+            return true;
         }
-        return;
+        return false;
     }
 
     method void setpoint(int k){
+        var Pikachu p;
+        var PikachuComputer pc;
+
+        let p = PhysicsManager.getPikachu();
+        let pc = PhysicsManager.getPikachuComputer();
+        
+        let x = p.getPoint();
+        let y = pc.getPoint();
+
         if (k > 245){
-            let x = x + 1;
+            do p.setPoint(x + 1);
             let xwin = true;
         }
         else{
-            let y = y + 1;
+            do pc.setPoint(y + 1);
             let xwin = false;
         }
         return;
@@ -51,8 +79,12 @@ class Floor {
         return;
     }
 
+    method int getWinPoint(){
+        return winpoint;
+    }
+
     method void update(){
-        if (hitTheFloor){
+        if (hitTheFloor | ~(deterwin())){
             do Draw.drawgoalanime();
             do Main.reset();
             do Draw.drawpreparing();
@@ -61,6 +93,15 @@ class Floor {
     }
 
     method void render(){
+        var Pikachu p;
+        var PikachuComputer pc;
+
+        let p = PhysicsManager.getPikachu();
+        let pc = PhysicsManager.getPikachuComputer();
+
+        let x = p.getPoint();
+        let y = pc.getPoint();
+
         do Draw.drawFloor();
         do Draw.drawpointboard(x, y);
         return;

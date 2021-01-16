@@ -1,17 +1,20 @@
 class PikachuComputer {
 
-    field int x, y, vy, jumpV, t, hitTime, step;
-    field boolean faceright, ontheair, pastColliding, chasing;
+    field int x, y, vy, jumpV, t, hitTime, step, point;
+    field boolean faceright, ontheair, pastColliding, chasing, end, result;
     static int dx, sx, sy; // move per press, sizex, sizey
     constructor PikachuComputer new(boolean fr) {
         let x = 411;
         let y = 180;
         let step = 0;
+        let point = 0;
 
         let faceright = fr;
         let ontheair = false;
         let pastColliding = false;
         let chasing = true;
+        let end = false;
+        let result = false;
 
         let sx = 30;
         let sy = 60;
@@ -23,11 +26,13 @@ class PikachuComputer {
     }
 
     method void movex(boolean dir){
-        if (dir){
-            let x = x + dx;
-        }
-        else {
-            let x = x - dx;
+        if (~(end) | (end & ontheair)){
+            if (dir){
+                let x = x + dx;
+            }
+            else {
+                let x = x - dx;
+            }
         }
         return;
     }
@@ -35,9 +40,10 @@ class PikachuComputer {
     method void movey() {
         var int dt, dy;
         let dt = Phys.getDt();
-
-        let dy = dt*vy;
-        let y = y + dy;
+        if (~(end) | (end & ontheair)){
+            let dy = dt*vy;
+            let y = y + dy;
+        }
         return;
     }
 
@@ -218,10 +224,20 @@ class PikachuComputer {
 
 
     method void render() {
-        do Draw.drawPikachufaceleft(x, y, step);
-        let step = step + 1;
-        if (step = 10){
-            let step = 0;
+        if (end){
+            if (result){
+                do Draw.drawPikachuWin(x, y);
+            }
+            else{
+                do Draw.drawPikachuSlideLeft(x, y, 0);
+            }
+        }
+        else{
+            do Draw.drawPikachufaceleft(x, y, step);
+            let step = step + 1;
+            if (step = 10){
+                let step = 0;
+            }
         }
         return;
     }
@@ -283,6 +299,33 @@ class PikachuComputer {
         let chasing = true;
         let pastColliding = false;
 
+        return;
+    }
+
+    method int getPoint(){
+        return point;
+    }
+
+    method int getx() {
+        return x;
+    }
+
+    method int gety() {
+        return y;
+    }
+
+    method void setPoint(int k) {
+        let point = k;
+        return;
+    }
+
+    method void setEnd(boolean b){
+        let end = b;
+        return;
+    }
+
+    method void setResult(boolean b){
+        let result = b;
         return;
     }
 }

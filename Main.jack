@@ -1,7 +1,7 @@
 class Main {
 
     static int t, updaterate;
-    static boolean selecting, playing;
+    static boolean selecting, playing, win;
 
     static Pikachu p;
     static PikachuComputer pc;
@@ -11,46 +11,50 @@ class Main {
     static Floor f;
 
     function void main() {
-        
-        let p = Pikachu.new(true);
-        let pc = PikachuComputer.new(false);
-        let b = Ball.new(100, 30);
-        let r = Rod.new();
-        let a = Point.new();
-        let f = Floor.new();
 
-        let selecting = true;
-        let playing = false;
-        let t = 0;
-        let updaterate = 20;
+        while(true){
+            let p = Pikachu.new(true);
+            let pc = PikachuComputer.new(false);
+            let b = Ball.new(100, 30);
+            let r = Rod.new();
+            let a = Point.new();
+            let f = Floor.new();
+    
+            let selecting = true;
+            let playing = false;
+            let win = false;
+            let t = 0;
+            let updaterate = 20;
+    
+            do Phys.init();
+            do PhysicsManager.init(p, pc, b, r, f);
+            do ScreenManager.init(p, pc, b, r, f);
+            do Draw.init();
+    
+            do ScreenManager.mainlobby();
 
-        do Phys.init();
-        do PhysicsManager.init(p, pc, b, r, f);
-        do ScreenManager.init(p, pc, b, r, f);
-        do Draw.init();
-
-        do ScreenManager.mainlobby();
-
-        while(selecting){
-            do a.update();
-            if (a.getstart()){
-                let selecting = false;
-                let playing = true;
+            while(selecting){
+                do a.update();
+                if (a.getstart()){
+                    let selecting = false;
+                    let playing = true;
+                }
             }
-        }
 
-        do Draw.drawpreparing();
+            do Draw.drawpreparing();
 
-        while(playing) {
-            do PhysicsManager.update();
-            if (Util.rem(t, 2) = 0) {
-                do ScreenManager.render();
+            while(playing & ~(win)) {
+                do PhysicsManager.update();
+                let win = f.deterwin();
+                if (Util.rem(t, 2) = 0) {
+                    do ScreenManager.render();
+                }
+                let t = t + 1;
+                if (t = 6000) {
+                    let t = 0;
+                }
+                do Sys.wait(updaterate);
             }
-            let t = t + 1;
-            if (t = 6000) {
-                let t = 0;
-            }
-            do Sys.wait(updaterate);
         }
         return;
     }
@@ -74,5 +78,9 @@ class Main {
         do pc.reset();
         do b.reset(f.getxwin());
         return;
+    }
+
+    function int getUpdateRate(){
+        return updaterate;
     }
 }
