@@ -8,6 +8,7 @@ class Point {
         let y0 = 132;
         let t = 1;
         let select = false;
+        let start = false;
         return this;
     }
 

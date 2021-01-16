@@ -1,6 +1,6 @@
 class Main {
 
-    static int t, updaterate;
+    static int t, k, updaterate;
     static boolean selecting, playing, win;
 
     static Pikachu p;
@@ -11,7 +11,6 @@ class Main {
     static Floor f;
 
     function void main() {
-
         while(true){
             let p = Pikachu.new(true);
             let pc = PikachuComputer.new(false);
@@ -24,6 +23,7 @@ class Main {
             let playing = false;
             let win = false;
             let t = 0;
+            let k = 0;
             let updaterate = 20;
     
             do Phys.init();
@@ -41,6 +41,8 @@ class Main {
                 }
             }
 
+            do Draw.dispose();
+
             do Draw.drawpreparing();
 
             while(playing & ~(win)) {
@@ -54,6 +56,17 @@ class Main {
                     let t = 0;
                 }
                 do Sys.wait(updaterate);
+                if (win){
+                    while(k < 100){
+                        do Draw.drawend();
+                        do PhysicsManager.update();
+                        if (Util.rem(k, 1) = 0) {
+                            do ScreenManager.render();
+                        }
+                        let k = k + 1;
+                        do Sys.wait(updaterate);
+                    }
+                }
             }
         }
         return;

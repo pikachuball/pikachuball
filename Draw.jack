@@ -1,7 +1,6 @@
 class Draw {
     static String title, speed, winpo, start, low, middle, high, 
-                    easy, normal, hard, ready, pointb, whites, five,
-                    ten, fifteen, end;
+                    ready, pointb, whites, five, ten, fifteen, end;
 
     function void init(){
         let title = "                      Pikachu ball !";
@@ -11,9 +10,6 @@ class Draw {
         let low   = "                           low";
         let middle= "                          middle";
         let high  = "                           high";
-        let easy  = "                           easy";
-        let normal= "                          normal";
-        let hard  = "                           hard";
         let five  = "                             5";
         let ten   = "                            10";
         let fifteen="                            15";
@@ -22,6 +18,20 @@ class Draw {
         let whites= "                         ";
         let pointb= "    :    ";
         
+        return;
+    }
+
+    function void dispose(){
+        do title.dispose();
+        do speed.dispose();
+        do winpo.dispose();
+        do start.dispose();
+        do low.dispose();
+        do middle.dispose();
+        do high.dispose();
+        do five.dispose();
+        do ten.dispose();
+        do fifteen.dispose();
         return;
     }
 
@@ -3283,17 +3293,7 @@ class Draw {
     }
 
     function void drawendanime(){
-        var int t;
-        let t = 0;
-        while(t < 5000){
-            do Draw.drawend();
-            do PhysicsManager.update();
-            if (Util.rem(t, 1) = 0) {
-                do ScreenManager.render();
-            }
-            let t = t + 1;
-            do Sys.wait(Main.getUpdateRate());
-        }
+
         return;
     }
 }

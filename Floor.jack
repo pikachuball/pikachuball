@@ -1,12 +1,15 @@
 class Floor {
     field int x, y, winpoint;
-    field boolean xwin, hitTheFloor;
+    field boolean xwin, hitTheFloor, end, haveDraw;
 
     constructor Floor new(){
 
         let x = 0;
         let y = 0;
         let hitTheFloor = false;
+        let end = false;
+        let haveDraw = false;
+
         return this;
     }
 
@@ -34,6 +37,8 @@ class Floor {
             do p.setEnd(true);
             do pc.setEnd(true);
 
+            let end = true;
+
             if (x > y){
                 do p.setResult(true);
                 do pc.setResult(false);
@@ -42,14 +47,12 @@ class Floor {
                 do p.setResult(false);
                 do pc.setResult(true);
             }
-            
-            do Draw.drawendanime();
-            do Sys.wait(1000);
+
             return true;
         }
         return false;
     }
-    
+
     method boolean ballAlive() {
         return ~(hitTheFloor);
     }
@@ -94,7 +97,8 @@ class Floor {
     }
 
     method void update(){
-        if (hitTheFloor | ~(deterwin())){
+        do deterwin();
+        if (hitTheFloor & ~(end)){
             do Draw.drawgoalanime();
             do Main.reset();
             do Draw.drawpreparing();
