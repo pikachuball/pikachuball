@@ -64,9 +64,11 @@ class Ball {
             if (vy > -3) {
                 let vy = 0;
             }
-            
+
+            if (f.ballAlive()) {
+                do f.setpoint(x);
+            }
             do f.setDeterHitTheFloor(true);
-            do f.setpoint(x);
         }
         if (y < (r+1)) {
             let vy = Math.abs(vy);

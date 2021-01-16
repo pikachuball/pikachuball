@@ -3,6 +3,10 @@ class Floor {
     field boolean xwin, hitTheFloor;
 
     constructor Floor new(){
+
+        let x = 0;
+        let y = 0;
+        let hitTheFloor = false;
         return this;
     }
 
@@ -25,6 +29,7 @@ class Floor {
         let x = p.getPoint();
         let y = pc.getPoint();
 
+
         if (x = winpoint | y = winpoint){
             do p.setEnd(true);
             do pc.setEnd(true);
@@ -44,6 +49,11 @@ class Floor {
         }
         return false;
     }
+    
+    method boolean ballAlive() {
+        return ~(hitTheFloor);
+    }
+
 
     method void setpoint(int k){
         var Pikachu p;
