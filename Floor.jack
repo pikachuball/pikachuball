@@ -24,8 +24,8 @@ class Floor {
 
     method void deterwin(){
         if (x = winpoint | y = winpoint){
+            do Main.setPlaying(pl);
             do Draw.drawend();
-            do Sys.wait(1000);
             //do Main.restart();
         }
         return;
@@ -40,6 +40,7 @@ class Floor {
             let y = y + 1;
             let xwin = false;
         }
+        do deterwin();
         return;
     }
 

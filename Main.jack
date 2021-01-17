@@ -52,6 +52,10 @@ class Main {
         return;
     }
 
+    function void setPlaying(boolean pl) {
+        let playing = pl;
+    }
+
     function void setupdaterate(int x){
         if (x = 1){
             let updaterate = 50;
