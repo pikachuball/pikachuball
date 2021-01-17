@@ -68,14 +68,21 @@ class Floor {
         let x = p.getPoint();
         let y = pc.getPoint();
 
-        if (k > 245){
-            do p.setPoint(x + 1);
-            let xwin = true;
+        if (end){
+            return;
         }
+
         else{
-            do pc.setPoint(y + 1);
-            let xwin = false;
+            if (k > 245){
+                do p.setPoint(x + 1);
+                let xwin = true;
+            }
+            else{
+                do pc.setPoint(y + 1);
+                let xwin = false;
+            }
         }
+
         return;
     }
 
@@ -119,6 +126,10 @@ class Floor {
         do Draw.drawFloor();
         do Draw.drawpointboard(x, y);
         return;
+    }
+
+    method boolean getEnd(){
+        return end;
     }
     
 }
