@@ -41,8 +41,6 @@ class Main {
                 }
             }
 
-            do Draw.dispose();
-
             do Draw.drawpreparing();
 
             while(playing & ~(win)) {
@@ -57,7 +55,7 @@ class Main {
                 }
                 do Sys.wait(updaterate);
                 if (win){
-                    while(k < 100){
+                    while(k < 150){
                         do Draw.drawend();
                         do PhysicsManager.update();
                         if (Util.rem(k, 1) = 0) {
