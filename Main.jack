@@ -43,15 +43,6 @@ class Main {
 
             do Draw.drawpreparing();
 
-<<<<<<< HEAD
-        while(playing) {
-            do PhysicsManager.update();
-            if (Util.rem(t, 2) = 0) {
-                do ScreenManager.render();
-            }
-            let t = t + 1;
-            do Sys.wait(updaterate);
-=======
             while(playing & ~(win)) {
                 do PhysicsManager.update();
                 let win = f.deterwin();
@@ -75,13 +66,8 @@ class Main {
                     }
                 }
             }
->>>>>>> james
         }
         return;
-    }
-
-    function void setPlaying(boolean pl) {
-        let playing = pl;
     }
 
     function void setupdaterate(int x){
@@ -101,6 +87,7 @@ class Main {
         do p.reset();
         do pc.reset();
         do b.reset(f.getxwin());
+        do f.setwinpoint(3);
         return;
     }
 

@@ -9,6 +9,7 @@ class Floor {
         let hitTheFloor = false;
         let end = false;
         let haveDraw = false;
+        let winpoint = 15;
 
         return this;
     }
@@ -34,11 +35,6 @@ class Floor {
 
 
         if (x = winpoint | y = winpoint){
-<<<<<<< HEAD
-            do Main.setPlaying(pl);
-            do Draw.drawend();
-            //do Main.restart();
-=======
             do p.setEnd(true);
             do pc.setEnd(true);
 
@@ -54,7 +50,6 @@ class Floor {
             }
 
             return true;
->>>>>>> james
         }
         return false;
     }
@@ -88,11 +83,6 @@ class Floor {
                 let xwin = false;
             }
         }
-<<<<<<< HEAD
-        do deterwin();
-=======
-
->>>>>>> james
         return;
     }
 
