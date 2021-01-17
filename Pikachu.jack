@@ -1,13 +1,14 @@
 class Pikachu{
 
-    field int x, y, vy, t, stopTime, smashTime, step;
+    field int x, y, vy, t, stopTime, smashTime, step, point;
     field char smashDirection;
-    field boolean faceright, ontheair, sliding, stopping, smashing, pastColliding;
+    field boolean faceright, ontheair, sliding, stopping, smashing, pastColliding, end, result;
     static int dx, slide_x, sx, sy; // move per press, sizex, sizey
     constructor Pikachu new(boolean fr) {
         let x = 100;
         let y = 180;
         let step = 0;
+        let point = 0;
 
         let faceright = fr;
         let ontheair = false;
@@ -15,6 +16,8 @@ class Pikachu{
         let stopping = false;
         let smashing = false;
         let pastColliding = false;
+        let end = false;
+        let result = false;
 
         let sx = 40;
         let sy = 60;
@@ -260,19 +263,29 @@ class Pikachu{
 
 
     method void render() {
-        if (sliding) {
-            if (faceright) {
-                do Draw.drawPikachuSlideRight(x, y, 0);
+        if (end){
+            if (result){
+                do Draw.drawPikachuWin(x, y);
             }
-            else {
-                do Draw.drawPikachuSlideLeft(x, y, 0);
+            else{
+                do Draw.drawPikachuLose(x, y+20);
             }
         }
-        else {
-            do Draw.drawPikachufaceright(x, y, step);
-            let step = step + 1;
-            if (step = 10){
-                let step = 0;
+        else{
+            if (sliding) {
+                if (faceright) {
+                    do Draw.drawPikachuSlideRight(x, y, 0);
+                }
+                else {
+                    do Draw.drawPikachuSlideLeft(x, y, 0);
+                }
+            }
+            else {
+                do Draw.drawPikachufaceright(x, y, step);
+                let step = step + 1;
+                if (step = 10){
+                    let step = 0;
+                }
             }
         }
         return;
@@ -300,28 +313,30 @@ class Pikachu{
     method void keyInput() {
         var char c;
         let c = Keyboard.keyPressed();
-        if(smashing) {
-            if (isValidSmashDirection(c)) {
-                let smashDirection = c;
+        if (~(end)){
+            if(smashing) {
+                if (isValidSmashDirection(c)) {
+                    let smashDirection = c;
+                }
             }
-        }
-        if (c = 130){
-            do movex(0);
-            let faceright = false ;    //left
-        }
-        if (c = 132) {
-            do movex(-1);
-            let faceright = true ;     //right
-        }
-        if (~(ontheair) & c = 131){    // up
-            do jump();
-        }
-        if (c = 128) { // enter
-            if (ontheair) {
-                do spike();
+            if (c = 130){
+                do movex(0);
+                let faceright = false ;    //left
             }
-            else {
-                do slide();
+            if (c = 132) {
+                do movex(-1);
+                let faceright = true ;     //right
+            }
+            if (~(ontheair) & c = 131){    // up
+                do jump();
+            }
+            if (c = 128) { // enter
+                if (ontheair) {
+                    do spike();
+                }
+                else {
+                    do slide();
+                }
             }
         }
         return;
@@ -345,6 +360,25 @@ class Pikachu{
 
     method boolean getOnTheAir() {
         return ontheair;
+    }
+
+    method int getPoint(){
+        return point;
+    }
+
+    method void setPoint(int k) {
+        let point = k;
+        return;
+    }
+
+    method void setEnd(boolean b){
+        let end = b;
+        return;
+    }
+
+    method void setResult(boolean b){
+        let result = b;
+        return;
     }
 
     method void reset(){

@@ -1,11 +1,15 @@
 class Floor {
     field int x, y, winpoint;
-    field boolean xwin, hitTheFloor;
+    field boolean xwin, hitTheFloor, end, haveDraw;
 
     constructor Floor new(){
+
         let x = 0;
         let y = 0;
         let hitTheFloor = false;
+        let end = false;
+        let haveDraw = false;
+
         return this;
     }
 
@@ -18,29 +22,77 @@ class Floor {
         return;
     }
 
-    method boolean ballAlive() {
-        return ~hitTheFloor;
-    }
+    method boolean deterwin(){
+        var Pikachu p;
+        var PikachuComputer pc;
 
-    method void deterwin(){
+        let p = PhysicsManager.getPikachu();
+        let pc = PhysicsManager.getPikachuComputer();
+
+        let x = p.getPoint();
+        let y = pc.getPoint();
+
+
         if (x = winpoint | y = winpoint){
+<<<<<<< HEAD
             do Main.setPlaying(pl);
             do Draw.drawend();
             //do Main.restart();
+=======
+            do p.setEnd(true);
+            do pc.setEnd(true);
+
+            let end = true;
+
+            if (x > y){
+                do p.setResult(true);
+                do pc.setResult(false);
+            }
+            else{
+                do p.setResult(false);
+                do pc.setResult(true);
+            }
+
+            return true;
+>>>>>>> james
         }
-        return;
+        return false;
     }
 
+    method boolean ballAlive() {
+        return ~(hitTheFloor);
+    }
+
+
     method void setpoint(int k){
-        if (k > 245){
-            let x = x + 1;
-            let xwin = true;
+        var Pikachu p;
+        var PikachuComputer pc;
+
+        let p = PhysicsManager.getPikachu();
+        let pc = PhysicsManager.getPikachuComputer();
+        
+        let x = p.getPoint();
+        let y = pc.getPoint();
+
+        if (end){
+            return;
         }
+
         else{
-            let y = y + 1;
-            let xwin = false;
+            if (k > 245){
+                do p.setPoint(x + 1);
+                let xwin = true;
+            }
+            else{
+                do pc.setPoint(y + 1);
+                let xwin = false;
+            }
         }
+<<<<<<< HEAD
         do deterwin();
+=======
+
+>>>>>>> james
         return;
     }
 
@@ -57,8 +109,13 @@ class Floor {
         return;
     }
 
+    method int getWinPoint(){
+        return winpoint;
+    }
+
     method void update(){
-        if (hitTheFloor){
+        do deterwin();
+        if (hitTheFloor & ~(end)){
             do Draw.drawgoalanime();
             do Main.reset();
             do Draw.drawpreparing();
@@ -67,9 +124,22 @@ class Floor {
     }
 
     method void render(){
+        var Pikachu p;
+        var PikachuComputer pc;
+
+        let p = PhysicsManager.getPikachu();
+        let pc = PhysicsManager.getPikachuComputer();
+
+        let x = p.getPoint();
+        let y = pc.getPoint();
+
         do Draw.drawFloor();
         do Draw.drawpointboard(x, y);
         return;
+    }
+
+    method boolean getEnd(){
+        return end;
     }
     
 }

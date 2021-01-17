@@ -23,6 +23,14 @@ class PhysicsManager {
         return;
     }
 
+    function Pikachu getPikachu() {
+        return p;
+    }
+
+    function PikachuComputer getPikachuComputer() {
+        return pc;
+    }
+
     function Ball getBall() {
         return b;
     }
