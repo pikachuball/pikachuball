@@ -5,7 +5,7 @@ class Draw {
     function void init() {
         let title = "                      Pikachu ball !";
         let speed = "                      select speed !";
-        let winpo = "                     selset winpoint !";
+        let winpo = "                      set winpoint !";
         let start = "                          start !";
         let low   = "                           low";
         let middle= "                          middle";
