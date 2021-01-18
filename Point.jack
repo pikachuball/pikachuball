@@ -1,6 +1,7 @@
 class Point {
     field int x, y, x0, y0, t;
     field boolean select, start;
+    field char lastInput;
     constructor Point new(){
         let x = 350;
         let y = 132;
@@ -9,6 +10,7 @@ class Point {
         let t = 1;
         let select = false;
         let start = false;
+        let lastInput = 0;
         return this;
     }
 
@@ -118,10 +120,22 @@ class Point {
         do init();
         return;
     }
-    
+
     method void keyInput() {
+        while(~readKey()){}
+        return;
+    }
+    
+    method boolean readKey() {
         var char c;
-        let c = Keyboard.readChar();
+        let c = Keyboard.keyPressed();
+        if (c = lastInput) {
+            return false;
+        }
+        let lastInput = c;
+        if (c = 0) {
+            return false;
+        }
         if (c = 131){               // up
             do moveup();
         }
@@ -130,9 +144,8 @@ class Point {
         }
         if (c = 128){               // c
             do setSelect(true);
-            do Output.backSpace();
         }
-        return;
+        return true;
     }
 
     method void update() {
