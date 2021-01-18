@@ -19,7 +19,7 @@ class PikachuComputer {
         let sx = 30;
         let sy = 60;
 
-        let dx = 5;
+        let dx = 7;
         let jumpV = -15;
         
         return this;
@@ -269,7 +269,7 @@ class PikachuComputer {
         
         let nx = Util.calculateLanding(PhysicsManager.getBall(), y, y+sy);
         if (nx < r.getLeft()) {
-            let nx = 384 + (sx/2);
+            let nx = 370 + (sx/2);
         }
         let mx = x+(sx/2);
         if (nx < mx) {
