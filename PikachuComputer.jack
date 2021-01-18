@@ -230,7 +230,7 @@ class PikachuComputer {
                 do Draw.drawPikachuWin(x, y);
             }
             else{
-                do Draw.drawPikachuSlideLeft(x, y, 0);
+                do Draw.drawPikachuLose(x, y+20);
             }
         }
         else{

@@ -33,6 +33,10 @@ class Rod {
             return; // stay on right
         }
 
+        if (b.getvx() = 0) {
+            return;
+        }
+
         if(((px+r) < x) & (b.getvx() > 0)) {
             do b.setVx(-Math.abs(b.getvx()) * 7 / 10);
             do b.setx(x-r);
