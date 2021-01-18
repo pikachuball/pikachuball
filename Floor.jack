@@ -1,6 +1,6 @@
 class Floor {
     field int x, y, winpoint;
-    field boolean xwin, hitTheFloor, end, haveDraw;
+    field boolean xwin, hitTheFloor, end, haveDraw, canScore;
 
     constructor Floor new(){
 
@@ -10,6 +10,7 @@ class Floor {
         let end = false;
         let haveDraw = false;
         let winpoint = 15;
+        let canScore = true;
 
         return this;
     }
@@ -21,6 +22,10 @@ class Floor {
     method void setDeterHitTheFloor(boolean b){
         let hitTheFloor = b;
         return;
+    }
+
+    method boolean getHitTheFloor() {
+        return hitTheFloor;
     }
 
     method boolean deterwin(){
@@ -54,14 +59,13 @@ class Floor {
         return false;
     }
 
-    method boolean ballAlive() {
-        return ~(hitTheFloor);
-    }
-
-
     method void setpoint(int k){
         var Pikachu p;
         var PikachuComputer pc;
+
+        if (~canScore) {
+            return;
+        }
 
         let p = PhysicsManager.getPikachu();
         let pc = PhysicsManager.getPikachuComputer();
@@ -82,6 +86,7 @@ class Floor {
                 do pc.setPoint(y + 1);
                 let xwin = false;
             }
+            let canScore = false;
         }
         return;
     }
@@ -105,11 +110,12 @@ class Floor {
 
     method void update(){
         do deterwin();
-        if (hitTheFloor & ~(end)){
-            do Draw.drawgoalanime();
-            do Main.reset();
-            do Draw.drawpreparing();
-        }
+        return;
+    }
+
+    method void reset() {
+        let canScore = true;
+        let hitTheFloor = false;
         return;
     }
 

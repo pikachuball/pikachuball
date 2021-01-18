@@ -29,14 +29,4 @@ class ScreenManager {
         do Draw.drawTitle();
         return;
     }
-
-    function void playing(){
-        // TODO
-        return;
-    }
-
-    function void end(){
-        // TODO
-        return;
-    }
 }

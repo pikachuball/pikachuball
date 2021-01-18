@@ -57,17 +57,15 @@ class Ball {
         var Floor f;
         let f = PhysicsManager.getFloor();
         do f.setDeterHitTheFloor(false);
-        if (y > (Phys.getGround()-r-1)) {
+        if (y > (Phys.getGround()-r-1)) { // collide with the floor
             let vy = -Math.abs(vy) * 7 / 10;
             let y = Phys.getGround()-r;
 
             if (vy > -3) {
-                let vy = 0;
+                let vy = 0; // to prevent minor bouncing
             }
 
-            if (f.ballAlive()) {
-                do f.setpoint(x);
-            }
+            do f.setpoint(x);
             do f.setDeterHitTheFloor(true);
         }
         if (y < (r+1)) {

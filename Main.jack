@@ -1,7 +1,7 @@
 class Main {
 
-    static int t, k, updaterate;
-    static boolean selecting, playing, win;
+    static int t, updaterate, effectTime;
+    static boolean selecting, playing, win, afterGoal;
 
     static Pikachu p;
     static PikachuComputer pc;
@@ -11,61 +11,91 @@ class Main {
     static Floor f;
 
     function void main() {
+        do Phys.init();
+        do Draw.init();
         while(true){
-            let p = Pikachu.new(true);
-            let pc = PikachuComputer.new(false);
-            let b = Ball.new(100, 30);
-            let r = Rod.new();
-            let a = Point.new();
-            let f = Floor.new();
-    
-            let selecting = true;
-            let playing = false;
-            let win = false;
-            let t = 0;
-            let k = 0;
-            let updaterate = 20;
-    
-            do Phys.init();
-            do PhysicsManager.init(p, pc, b, r, f);
-            do ScreenManager.init(p, pc, b, r, f);
-            do Draw.init();
-    
-            do ScreenManager.mainlobby();
+            do Main.gameInit();
+            do Main.lobby();
+            do Main.play();
+            do Main.end();
+        }
+        return;
+    }
 
-            while(selecting){
-                do a.update();
-                if (a.getstart()){
-                    let selecting = false;
-                    let playing = true;
-                }
+    function void lobby() {
+        do f.setwinpoint(3);
+        do ScreenManager.mainlobby();
+        while(selecting){
+            do a.update();
+            if (a.getstart()){
+                let selecting = false;
+                let playing = true;
+            }
+        }
+        return;
+    }
+
+    function void gameInit() {
+        let p = Pikachu.new(true);
+        let pc = PikachuComputer.new(false);
+        let b = Ball.new(100, 30);
+        let r = Rod.new();
+        let a = Point.new();
+        let f = Floor.new();
+
+        let selecting = true;
+        let playing = false;
+        let afterGoal = false;
+        let win = false;
+        let t = 0;
+        let updaterate = 20;
+
+        
+        do PhysicsManager.init(p, pc, b, r, f);
+        do ScreenManager.init(p, pc, b, r, f);
+        return;
+    }
+
+    function void play() {
+        do Draw.drawpreparing();
+
+        while(~win) {
+            do PhysicsManager.update();
+            let win = f.deterwin();
+            if (Util.rem(t, 2) = 0) {
+                do ScreenManager.render();
+            }
+            
+            if (f.getHitTheFloor()) {
+                let effectTime = t;
+                let afterGoal = true;
             }
 
-            do Draw.drawpreparing();
-
-            while(playing & ~(win)) {
-                do PhysicsManager.update();
-                let win = f.deterwin();
-                if (Util.rem(t, 2) = 0) {
-                    do ScreenManager.render();
+            if (afterGoal) {
+                do Sys.wait(100);
+                if (t - effectTime > 10) {
+                    do Main.reset();
+                    do Draw.drawpreparing();
+                    let afterGoal = false;
                 }
-                let t = t + 1;
-                if (t = 6000) {
-                    let t = 0;
-                }
+            }
+            else {
                 do Sys.wait(updaterate);
-                if (win){
-                    while(k < 150){
-                        do Draw.drawend();
-                        do PhysicsManager.update();
-                        if (Util.rem(k, 1) = 0) {
-                            do ScreenManager.render();
-                        }
-                        let k = k + 1;
-                        do Sys.wait(updaterate);
-                    }
-                }
             }
+
+            let t = t + 1;
+        }
+        let effectTime = t;
+        return;
+    }
+
+    function void end() {
+        while (t - effectTime < 150){
+            do Draw.drawend();
+            do PhysicsManager.update();
+            do ScreenManager.render();
+            do Sys.wait(updaterate);
+            let t = t + 1;
         }
         return;
     }
@@ -86,8 +116,8 @@ class Main {
     function void reset(){
         do p.reset();
         do pc.reset();
+        do f.reset();
         do b.reset(f.getxwin());
-        do f.setwinpoint(3);
         return;
     }
 

@@ -21,20 +21,6 @@ class Draw {
         return;
     }
 
-    function void dispose(){
-        do title.dispose();
-        do speed.dispose();
-        do winpo.dispose();
-        do start.dispose();
-        do low.dispose();
-        do middle.dispose();
-        do high.dispose();
-        do five.dispose();
-        do ten.dispose();
-        do fifteen.dispose();
-        return;
-    }
-
     function void drawPikachu(int x, int y) {
         do Screen.drawPixel(x, y-1);
         do Screen.drawPixel(x, y-11);
@@ -1983,14 +1969,6 @@ class Draw {
         return;
     }
 
-    function void drawPikachuJumpRight(int x, int y){
-        return;
-    }
-
-    function void drawPikachuJumpLeft(int x, int y){
-        return;
-    }
-
     function void drawPikachuWin(int x, int y){
         do Screen.drawPixel(x+4, y+0);
         do Screen.drawPixel(x+15, y+0);
@@ -3007,20 +2985,6 @@ class Draw {
         do Output.println();
         do Output.println();
         do Output.println();
-        return;
-    }
-
-    function void drawgoalanime() {
-        var int t;
-        let t = 0;
-        while(t < 10) {
-            do PhysicsManager.update();
-            if (Util.rem(t, 1) = 0) {
-                do ScreenManager.render();
-            }
-            let t = t + 1;
-            do Sys.wait(100);
-        }
         return;
     }
 
