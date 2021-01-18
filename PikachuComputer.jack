@@ -19,7 +19,7 @@ class PikachuComputer {
         let sx = 30;
         let sy = 60;
 
-        let dx = 12;
+        let dx = 5;
         let jumpV = -15;
         
         return this;
@@ -127,8 +127,8 @@ class PikachuComputer {
             let ny = -2;
         }
         if (smashDirection = 131) {
-            let nx = -35;
-            let ny = -25;
+            let nx = -20;
+            let ny = -15;
         }
         if (smashDirection = 133) {
             let nx = -15;
@@ -144,7 +144,14 @@ class PikachuComputer {
         let hitTime = t;
         let b = PhysicsManager.getBall();
         let chasing = false;
-        do b.setVx(0);
+
+        if (b.getvx() = 0) {
+            do b.setVx(-15);
+        }
+        else {
+            do b.setVx(0);
+        }
+        
         do b.setVy(-15);
         return;
     }
@@ -268,9 +275,8 @@ class PikachuComputer {
         
         let nx = Util.calculateLanding(PhysicsManager.getBall(), y, y+sy);
         if (nx < r.getLeft()) {
-            return;
+            let nx = 384 + (sx/2);
         }
-        // do Screen.drawRectangle(nx, 0, nx+15, 20);
         let mx = x+(sx/2);
         if (nx < mx) {
             do movex(0);
