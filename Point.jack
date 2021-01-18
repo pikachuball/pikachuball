@@ -142,7 +142,7 @@ class Point {
         if (c = 133){               // down
             do movedown();
         }
-        if (c = 128){               // c
+        if (c = 128){               // enter
             do setSelect(true);
         }
         return true;

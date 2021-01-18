@@ -39,7 +39,7 @@ class Floor {
         let y = pc.getPoint();
 
 
-        if (x = winpoint | y = winpoint){
+        if ((x = winpoint) | (y = winpoint)){
             do p.setEnd(true);
             do pc.setEnd(true);
 
