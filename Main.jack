@@ -45,7 +45,7 @@ class Main {
 
         let selecting = true;
         let playing = false;
-        let afterGoal = false;
+        let afterGoal = false; // if afterGoal = true, means it's the slow down state after scoring a goal
         let win = false;
         let t = 0;
         let updaterate = 20;
