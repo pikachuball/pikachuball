@@ -144,19 +144,13 @@ class PikachuComputer {
         let hitTime = t;
         let b = PhysicsManager.getBall();
         let chasing = false;
-
-        if (b.getvx() = 0) {
-            do b.setVx(-15);
-        }
-        else {
-            do b.setVx(0);
-        }
         
+        do b.setVx(0);
         do b.setVy(-15);
         return;
     }
 
-    method int collideWithBall() {
+    method boolean collideWithBall() {
         var boolean isColliding;
         let isColliding = collisionDetection();
         if (isColliding) {

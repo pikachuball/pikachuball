@@ -177,7 +177,7 @@ class Pikachu{
         return;
     }
 
-    method int collideWithBall() {
+    method boolean collideWithBall() {
         var boolean isColliding;
         let isColliding = collisionDetection();
         if (isColliding) {
